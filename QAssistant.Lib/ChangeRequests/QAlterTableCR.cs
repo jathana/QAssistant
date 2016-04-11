@@ -254,17 +254,24 @@ namespace QAssistant.Lib.ChangeRequests
          bool retval = true;
 
          // always ensure loaded
-         if (Load())
+         try
          {
-            retval = schema != null && schema.ObjectExists();
-            if (!retval)
+            if (Load())
             {
-               Actions.Add(new QCRAction(QCRActionState.NeedsAction, QCRActionType.AddTable, string.Format("Create table \"{0}\".", TableName), databaseName));
+               retval = schema != null && schema.ObjectExists();
+               if (!retval)
+               {
+                  Actions.Add(new QCRAction(QCRActionState.NeedsAction, QCRActionType.AddTable, string.Format("Create table \"{0}\".", TableName), databaseName));
+               }
+            }
+            else
+            {
+               Actions.Add(new QCRAction(QCRActionState.NeedsAction, QCRActionType.CheckDatabase, string.Format("Check database \"{0}\" of table \"{1}\".", DatabaseName, TableName), databaseName));
             }
          }
-         else
+         catch(Exception ex)
          {
-            Actions.Add(new QCRAction(QCRActionState.NeedsAction, QCRActionType.CheckDatabase, string.Format("Check database \"{0}\" of table \"{1}\".", DatabaseName, TableName), databaseName));
+            Actions.Add(new QCRAction(QCRActionState.NeedsAction, QCRActionType.CheckDatabase, ex.Message, databaseName));
          }
          return retval;
       }

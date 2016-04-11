@@ -258,7 +258,7 @@ namespace QAssistant
             }
             else
             {
-               XtraMessageBox.Show("Criterio either Unchecked or Needs attention.", "Info", MessageBoxButtons.OK);
+               XtraMessageBox.Show(string.Format("Criterio {0}.", cr.CheckResultType), "Info", MessageBoxButtons.OK);
             }
 
          }

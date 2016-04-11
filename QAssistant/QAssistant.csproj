@@ -185,7 +185,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Environments.xml">
+    <None Include="Configuration.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="reportwizard.ico" />

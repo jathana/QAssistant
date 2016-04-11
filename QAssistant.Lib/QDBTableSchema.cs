@@ -28,17 +28,12 @@ namespace QAssistant.Lib
       public bool Load(QDatabase database, string tableName)
       {
          bool retval = true;
-         try
-         {
-            SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT ORDINAL_POSITION, COLUMN_NAME FROM [INFORMATION_SCHEMA].[COLUMNS] WHERE TABLE_NAME = @table_name ORDER BY TABLE_NAME, ORDINAL_POSITION";
-            command.Parameters.Add(new SqlParameter("table_name", tableName));
-            Columns = database.ExecuteCommand(command);
-         }
-         catch (Exception ex)
-         {
-            retval = false;
-         }
+         
+         SqlCommand command = new SqlCommand();
+         command.CommandText = "SELECT ORDINAL_POSITION, COLUMN_NAME FROM [INFORMATION_SCHEMA].[COLUMNS] WHERE TABLE_NAME = @table_name ORDER BY TABLE_NAME, ORDINAL_POSITION";
+         command.Parameters.Add(new SqlParameter("table_name", tableName));
+         Columns = database.ExecuteCommand(command);
+        
          return retval;
       }
 

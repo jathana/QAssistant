@@ -41,7 +41,7 @@ namespace QAssistant
 
       private void RibbonForm1_Load(object sender, EventArgs e)
       {
-         QAssistant.Lib.QInstance.Init("environments.xml");
+         QAssistant.Lib.QInstance.Init("configuration.xml");
       }
 
       private void RibbonForm1_FormClosing(object sender, FormClosingEventArgs e)
