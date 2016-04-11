@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAssistant", "QAssistant\QAssistant.csproj", "{A369B49E-82C2-4CE7-9380-8E79A6347B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAssistant.Lib", "QAssistant.Lib\QAssistant.Lib.csproj", "{0E50D05D-2BC6-4681-B523-6D0523C1928A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAssistant.Lib.UI", "QAssistant.Lib.UI\QAssistant.Lib.UI.csproj", "{91FB3531-699D-4CB6-9AC0-206B86738F66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A369B49E-82C2-4CE7-9380-8E79A6347B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A369B49E-82C2-4CE7-9380-8E79A6347B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A369B49E-82C2-4CE7-9380-8E79A6347B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A369B49E-82C2-4CE7-9380-8E79A6347B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E50D05D-2BC6-4681-B523-6D0523C1928A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E50D05D-2BC6-4681-B523-6D0523C1928A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E50D05D-2BC6-4681-B523-6D0523C1928A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E50D05D-2BC6-4681-B523-6D0523C1928A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91FB3531-699D-4CB6-9AC0-206B86738F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FB3531-699D-4CB6-9AC0-206B86738F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FB3531-699D-4CB6-9AC0-206B86738F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FB3531-699D-4CB6-9AC0-206B86738F66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

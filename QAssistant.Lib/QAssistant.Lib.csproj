@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0E50D05D-2BC6-4681-B523-6D0523C1928A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QAssistant.Lib</RootNamespace>
+    <AssemblyName>QAssistant.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.Utils.v15.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.XtraEditors.v15.2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Smo, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChangeRequests\Delegates.cs" />
+    <Compile Include="ChangeRequests\QAddCriterio.cs" />
+    <Compile Include="ChangeRequests\QAddDUIFieldCR.cs" />
+    <Compile Include="ChangeRequests\QConfigureDUIStackCRModifier.cs" />
+    <Compile Include="ChangeRequests\QConfigureDUICRModifier.cs" />
+    <Compile Include="ChangeRequests\QConfigureDatasourceCRModifier.cs" />
+    <Compile Include="ChangeRequests\QAlterViewCRModifier.cs" />
+    <Compile Include="ChangeRequests\QConfigureDUICR.cs" />
+    <Compile Include="ChangeRequests\QConfigureDatasourceCR.cs" />
+    <Compile Include="ChangeRequests\QAddDatasourceFieldCR.cs" />
+    <Compile Include="ChangeRequests\QAddColumnToTableCR.cs" />
+    <Compile Include="ChangeRequests\QAddColumnToViewCR.cs" />
+    <Compile Include="ChangeRequests\QAlterTableCR.cs" />
+    <Compile Include="ChangeRequests\QChangeRequest.cs" />
+    <Compile Include="ChangeRequests\QChangeRequests.cs" />
+    <Compile Include="ChangeRequests\QConfigureDUIStackManyCR.cs" />
+    <Compile Include="ChangeRequests\QCRFactory.cs" />
+    <Compile Include="ChangeRequests\QConfigureDUIStackCR.cs" />
+    <Compile Include="ChangeRequests\QAlterTableCRModifier.cs" />
+    <Compile Include="ChangeRequests\QCRModifier.cs" />
+    <Compile Include="ChangeRequests\QDUIStackCRModifier.cs" />
+    <Compile Include="ChangeRequests\QGroupCR.cs" />
+    <Compile Include="ChangeRequests\QAlterViewCR.cs" />
+    <Compile Include="ChangeRequests\QCRAction.cs" />
+    <Compile Include="ChangeRequests\QDocumentCR.cs" />
+    <Compile Include="IModifier.cs" />
+    <Compile Include="IStateHandler.cs" />
+    <Compile Include="IValidatable.cs" />
+    <Compile Include="QCRCheckResultType.cs" />
+    <Compile Include="QCriterioType.cs" />
+    <Compile Include="QDatabaseName.cs" />
+    <Compile Include="QDatabaseNames.cs" />
+    <Compile Include="QDataComparer.cs" />
+    <Compile Include="QDataDiff.cs" />
+    <Compile Include="QDataDiffs.cs" />
+    <Compile Include="QCRField.cs" />
+    <Compile Include="QCRFields.cs" />
+    <Compile Include="QDBObjectType.cs" />
+    <Compile Include="QDynamicUI.cs" />
+    <Compile Include="QEnvironmentType.cs" />
+    <Compile Include="QInstance.cs" />
+    <Compile Include="QConnectionString.cs" />
+    <Compile Include="QCRActionType.cs" />
+    <Compile Include="QCRActionState.cs" />
+    <Compile Include="QDatabase.cs" />
+    <Compile Include="QDatabases.cs" />
+    <Compile Include="QDBTableSchema.cs" />
+    <Compile Include="QEnvironment.cs" />
+    <Compile Include="QEnvironments.cs" />
+    <Compile Include="QCDatabaseVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QInstallation.cs" />
+    <Compile Include="QConsts.cs" />
+    <Compile Include="QObjectFactory.cs" />
+    <Compile Include="QSQLServer.cs" />
+    <Compile Include="QSQLServers.cs" />
+    <Compile Include="QTableFieldsHelper.cs" />
+    <Compile Include="QTableScripter.cs" />
+    <Compile Include="TypeEditors\QDatabaseNamesTypeEditor.cs" />
+    <Compile Include="TypeEditors\QDatabaseNameTypeEditor.cs" />
+    <Compile Include="XmlNodeExtensions.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
