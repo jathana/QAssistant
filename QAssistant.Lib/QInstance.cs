@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace QAssistant.Lib
 {
@@ -10,7 +11,16 @@ namespace QAssistant.Lib
    {
       public static QEnvironments Environments;
 
+      private static string projectsPath = "";
+      public static string ProjectsPath
+      {
+         get
+         {
+            return projectsPath;
+         }
+      }
 
+     
          
       public static bool Init(string EnvFile)
       {
@@ -22,7 +32,10 @@ namespace QAssistant.Lib
                Environments.Dispose();
                Environments = null;
             }
-            Environments = new QEnvironments(EnvFile);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(EnvFile);
+            Environments = new QEnvironments(doc);
+            projectsPath = doc.SelectSingleNode("//projects/@path").Value;
          }
          catch(Exception ex)
          {

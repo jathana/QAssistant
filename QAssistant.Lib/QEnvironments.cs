@@ -10,12 +10,10 @@ namespace QAssistant.Lib
 {
    public class QEnvironments: Dictionary<QEnvironmentType, QEnvironment>, IDisposable
    { 
-      public QEnvironments(string EnvFile)
+      public QEnvironments(XmlDocument doc)
       {
-         if (File.Exists(EnvFile))
+         if (doc != null)
          {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(EnvFile);
             XmlNodeList envs = doc.SelectNodes("//environment");
             foreach (XmlNode envNode in envs)
             {

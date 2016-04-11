@@ -400,7 +400,10 @@ namespace QAssistant.Lib.ChangeRequests
          {
             throw new Exception("Invalid database name!");
          }
-
+         if(!CanBeScripted())
+         {
+            throw new Exception("Criterio cannot be scripted!Run Check.");
+         }
          QDatabase db = QInstance.Environments.GetDatabase(DatabaseName);
          try
          {

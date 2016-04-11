@@ -410,5 +410,29 @@ namespace QAssistant
             }
          }
       }
+
+      private void btnScriptCriteria_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+      {
+         frmScriptCriteria f = new frmScriptCriteria();
+         if(f.ShowDialog(docCR) == DialogResult.OK)
+         {
+            foreach(QAddCriterioCR cr in f.SelectedCriteria)
+            {
+               if(cr.CanBeScripted())
+               {
+                  try
+                  {
+                     string script = cr.GetScripted();
+                     File.WriteAllText(Path.Combine(f.SelectedPath, cr.CriUniqueId, ".sql"), script, Encoding.Unicode);
+                  }
+                  catch(Exception ex)
+                  {
+                     XtraMessageBox.Show(string.Format("Cannot script criterio {0} (reason:{1}).", cr.Name, cr.CheckResultType), "Script Criterio", MessageBoxButtons.OK);
+                  }
+               }
+
+            }
+         }
+      }
    }
 }

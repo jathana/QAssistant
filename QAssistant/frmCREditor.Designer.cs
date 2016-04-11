@@ -60,6 +60,7 @@
          this.btnConfigureDatasourceCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnNew = new DevExpress.XtraBars.BarButtonItem();
          this.btnOpen = new DevExpress.XtraBars.BarButtonItem();
+         this.btnScriptCriteria = new DevExpress.XtraBars.BarButtonItem();
          this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
          this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
          this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -268,9 +269,10 @@
             this.btnAlterTableCR,
             this.btnConfigureDatasourceCR,
             this.btnNew,
-            this.btnOpen});
+            this.btnOpen,
+            this.btnScriptCriteria});
          this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-         this.ribbonControl1.MaxItemId = 12;
+         this.ribbonControl1.MaxItemId = 13;
          this.ribbonControl1.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always;
          this.ribbonControl1.Name = "ribbonControl1";
          this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -378,6 +380,15 @@
          this.btnOpen.Name = "btnOpen";
          this.btnOpen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnOpen_ItemClick);
          // 
+         // btnScriptCriteria
+         // 
+         this.btnScriptCriteria.Caption = "Script Criteria";
+         this.btnScriptCriteria.Glyph = ((System.Drawing.Image)(resources.GetObject("btnScriptCriteria.Glyph")));
+         this.btnScriptCriteria.Id = 12;
+         this.btnScriptCriteria.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnScriptCriteria.LargeGlyph")));
+         this.btnScriptCriteria.Name = "btnScriptCriteria";
+         this.btnScriptCriteria.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnScriptCriteria_ItemClick);
+         // 
          // ribbonPage1
          // 
          this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -398,6 +409,7 @@
          // ribbonPageGroup2
          // 
          this.ribbonPageGroup2.ItemLinks.Add(this.btnCheckCR);
+         this.ribbonPageGroup2.ItemLinks.Add(this.btnScriptCriteria);
          this.ribbonPageGroup2.Name = "ribbonPageGroup2";
          this.ribbonPageGroup2.Text = "Build";
          // 
@@ -535,5 +547,6 @@
       private DevExpress.XtraBars.BarButtonItem btnOpen;
       private DevExpress.Utils.ImageCollection imageCollection1;
       private DevExpress.XtraEditors.Repository.RepositoryItemImageEdit repositoryItemImageEdit1;
+      private DevExpress.XtraBars.BarButtonItem btnScriptCriteria;
    }
 }
