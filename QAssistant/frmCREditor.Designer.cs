@@ -483,6 +483,7 @@
          this.Name = "frmCREditor";
          this.Text = "Change Request Editor";
          this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCREditor_FormClosing);
          this.Load += new System.EventHandler(this.frmCREditor_Load);
          ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.document1)).EndInit();

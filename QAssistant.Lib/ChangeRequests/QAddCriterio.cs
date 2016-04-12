@@ -31,6 +31,8 @@ namespace QAssistant.Lib.ChangeRequests
       private bool isCustomerLevel = false;
       private bool closedCases = false;
       private int installationCode = 0;
+      private string whereTable = "";
+      private string whereField = "";
       #endregion
 
       #region output fields
@@ -47,7 +49,7 @@ namespace QAssistant.Lib.ChangeRequests
       #endregion
 
 
-      #region properties
+      #region input properties
 
      
 
@@ -284,6 +286,42 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
 
+      [Category(QConsts.CategoryRequired)]
+      public string WhereTable
+      {
+         get
+         {
+            return whereTable;
+         }
+         set
+         {
+            if (value != this.whereTable)
+            {
+               this.whereTable = value;
+               NotifyPropertyChanged();
+            }
+         }
+      }
+
+      [Category(QConsts.CategoryRequired)]
+      public string WhereField
+      {
+         get
+         {
+            return whereField;
+         }
+         set
+         {
+            if (value != this.whereField)
+            {
+               this.whereField = value;
+               NotifyPropertyChanged();
+            }
+         }
+      }
+
+      #endregion
+      #region output properties
       [Category(QConsts.CategoryInherited)]
       public string CriUniqueId
       {
@@ -367,6 +405,8 @@ namespace QAssistant.Lib.ChangeRequests
 
       
 
+
+
       #endregion
 
 
@@ -397,6 +437,7 @@ namespace QAssistant.Lib.ChangeRequests
          {
             throw new Exception("Criterio cannot be scripted!Run Check.");
          }
+
          QDatabase db = QInstance.Environments.GetDatabase(DatabaseName);
          try
          {
@@ -444,6 +485,12 @@ namespace QAssistant.Lib.ChangeRequests
          if (DatabaseName.IsInvalid())
             errors.Add(nameof(DatabaseName), "Check DatabaseName.");
 
+         if (string.IsNullOrEmpty(whereTable))
+            errors.Add(nameof(WhereTable), "TableName is mandatory.");
+         if (string.IsNullOrEmpty(whereField))
+            errors.Add(nameof(WhereField), "FieldName is mandatory.");
+
+
          return errors.Count == 0;
       }
 
@@ -476,6 +523,8 @@ namespace QAssistant.Lib.ChangeRequests
             CategoryDesc =  this.categoryDesc,
             IsCustomerLevel = this.isCustomerLevel,
             ClosedCases = this.closedCases,
+            WhereTable = this.whereTable,
+            WhereField = this.whereField,
             Parent = this.Parent,
 
             // output fields
@@ -544,6 +593,8 @@ namespace QAssistant.Lib.ChangeRequests
             w.WriteAttributeString("categorydesc", categoryDesc.ToString());
             w.WriteAttributeString("iscustomerlevel", isCustomerLevel.ToString());
             w.WriteAttributeString("closedcases", closedCases.ToString());
+            w.WriteAttributeString("tablename", whereTable);
+            w.WriteAttributeString("fieldname", whereField);
 
             w.WriteEndElement();
             w.Flush();
@@ -567,7 +618,9 @@ namespace QAssistant.Lib.ChangeRequests
          DecisionTree = Node.ReadBool("decisiontree");
          CategoryDesc = Node.ReadString("categorydesc");
          IsCustomerLevel = Node.ReadBool("iscustomerlevel");
-         closedCases = Node.ReadBool("closedcases");
+         ClosedCases = Node.ReadBool("closedcases");
+         WhereTable = Node.ReadString("tablename");
+         WhereField = Node.ReadString("fieldname");
 
       }
 
@@ -589,6 +642,24 @@ namespace QAssistant.Lib.ChangeRequests
       {
          bool retval = true;
          if (!specValue.Equals(dbValue))
+         {
+            QCRAction check = new QCRAction()
+            {
+               State = QCRActionState.NeedsAction,
+               ActionType = QCRActionType.CheckCriterio,
+               Description = string.Format("Specification mismatch: Specification of \"{0}\" \"{1}\" does not match to implemented \"{2}\"", valueName, specValue, dbValue),
+               DatabaseName = this.DatabaseName
+            };
+            Actions.Add(check);
+            retval = false;
+         }
+         return retval;
+      }
+      private bool CheckSpecValue(string specValue, string dbValue, string valueName, bool checkIfContains)
+      {
+         bool retval = true;
+         bool invalid = (checkIfContains && !dbValue.Contains(specValue)) || (!checkIfContains && !specValue.Equals(dbValue));
+         if (invalid)
          {
             QCRAction check = new QCRAction()
             {
@@ -636,6 +707,8 @@ namespace QAssistant.Lib.ChangeRequests
                string tmpCategoryDesc = (string)tbRec.Rows[0]["CATEGORY_DESC"]; 
                bool tmpIsCustomerLevel = (bool)tbRec.Rows[0]["CRI_IS_CUSTOMER_LEVEL"];
                bool tmpClosedCases = (bool)tbRec.Rows[0]["CRI_CLOSED_CASES"];
+               string tmpCriWhereTable = (string)tbRec.Rows[0]["CRI_WHERE_TABLE"];
+               string tmpCriWhereField = (string)tbRec.Rows[0]["CRI_WHERE_FIELD"];
                retval = CheckSpecValue(CriterioType, tmpCriterioType, "Criterio Type") && retval;
                retval = CheckSpecValue(Queues, tmpQueues, "Queues") && retval;
                retval = CheckSpecValue(DynamicQueues, tmpDynamicQueues, "DynamicQueues") && retval;
@@ -644,10 +717,11 @@ namespace QAssistant.Lib.ChangeRequests
                retval = CheckSpecValue(DecisionTree, tmpDecisionTree, "DecisionTree") && retval;
                retval = CheckSpecValue(CategoryDesc, tmpCategoryDesc, "CategoryDesc") && retval;
                retval = CheckSpecValue(IsCustomerLevel, tmpIsCustomerLevel, "IsCustomerLevel") && retval;
-               retval = CheckSpecValue(ClosedCases, tmpClosedCases, "ClosedCases") && retval;
+               retval = CheckSpecValue(WhereField, tmpCriWhereField, "FieldName",true) && retval;
+               retval = CheckSpecValue(WhereTable, tmpCriWhereTable, "TableName") && retval;
 
                // set output fields
-               criUniqueId= (string)tbRec.Rows[0]["CRI_UNIQUE_ID"];
+               criUniqueId = (string)tbRec.Rows[0]["CRI_UNIQUE_ID"];
                criTable = (string)tbRec.Rows[0]["CRI_TABLE"];
                criFields = (string)tbRec.Rows[0]["CRI_FIELDS"];
                criWhere = (string)tbRec.Rows[0]["CRI_WHERE"];

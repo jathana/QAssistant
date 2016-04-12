@@ -20,7 +20,7 @@ namespace QAssistant
    public partial class frmCREditor : DevExpress.XtraEditors.XtraForm
    {
       private QDocumentCR docCR;
-
+      private string initialXml = "";
 
       private Dictionary<Type, EventHandler> addHandlers = new Dictionary<Type, EventHandler>();
       private Dictionary<Type, EventHandler> editHandlers = new Dictionary<Type, EventHandler>();
@@ -120,8 +120,8 @@ namespace QAssistant
          d.Filter = "Xml files (*.xml)|*.xml|All files (*.*)|*.*";
          if (d.ShowDialog() == DialogResult.OK)
          {
-            string str = docCR.Serialize();
-            File.WriteAllText(d.FileName, str, Encoding.UTF8);            
+            initialXml = docCR.Serialize();
+            File.WriteAllText(d.FileName, initialXml, Encoding.UTF8);            
          }
          
       }
@@ -388,6 +388,7 @@ namespace QAssistant
             XmlDocument doc = new XmlDocument();
             doc.Load(d.FileName);
             docCR.Deserialize(doc.DocumentElement);
+            initialXml = docCR.Serialize();
             trlCRTree.ExpandAll();
          }
       }
@@ -427,10 +428,25 @@ namespace QAssistant
                   }
                   catch(Exception ex)
                   {
-                     XtraMessageBox.Show(string.Format("Cannot script criterio {0} (reason:{1}).", cr.Name, cr.CheckResultType), "Script Criterio", MessageBoxButtons.OK);
+                     XtraMessageBox.Show(string.Format("Cannot script criterio {0} (reason:{1} - {2}).", cr.Name, cr.CheckResultType, ex.Message), "Script Criterio", MessageBoxButtons.OK);
                   }
                }
 
+            }
+         }
+      }
+
+      private void frmCREditor_FormClosing(object sender, FormClosingEventArgs e)
+      {
+         // check for changes
+         string currentXml = docCR.Serialize();
+         if(!initialXml.Equals(currentXml))
+         {
+            DialogResult res = XtraMessageBox.Show("Save changes?", "Save", MessageBoxButtons.YesNoCancel);
+            switch(res)
+            {
+               case DialogResult.Cancel: e.Cancel = true; break;
+               case DialogResult.Yes: btnSaveCR_ItemClick(null,null); break;
             }
          }
       }
