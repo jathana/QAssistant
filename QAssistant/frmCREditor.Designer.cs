@@ -133,7 +133,7 @@
          this.pnlCRTree.Location = new System.Drawing.Point(0, 141);
          this.pnlCRTree.Name = "pnlCRTree";
          this.pnlCRTree.OriginalSize = new System.Drawing.Size(457, 200);
-         this.pnlCRTree.Size = new System.Drawing.Size(457, 368);
+         this.pnlCRTree.Size = new System.Drawing.Size(457, 408);
          this.pnlCRTree.Text = "CR Tree";
          // 
          // dockPanel1_Container
@@ -141,7 +141,7 @@
          this.dockPanel1_Container.Controls.Add(this.trlCRTree);
          this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
          this.dockPanel1_Container.Name = "dockPanel1_Container";
-         this.dockPanel1_Container.Size = new System.Drawing.Size(449, 341);
+         this.dockPanel1_Container.Size = new System.Drawing.Size(449, 381);
          this.dockPanel1_Container.TabIndex = 0;
          // 
          // trlCRTree
@@ -161,7 +161,7 @@
          this.trlCRTree.OptionsView.ShowColumns = false;
          this.trlCRTree.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemImageEdit1});
-         this.trlCRTree.Size = new System.Drawing.Size(449, 341);
+         this.trlCRTree.Size = new System.Drawing.Size(449, 381);
          this.trlCRTree.TabIndex = 0;
          this.trlCRTree.GetStateImage += new DevExpress.XtraTreeList.GetStateImageEventHandler(this.trlCRTree_GetStateImage);
          this.trlCRTree.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.trlCRTree_FocusedNodeChanged);
@@ -224,10 +224,10 @@
          this.pnlActions.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
          this.pnlActions.FloatVertical = true;
          this.pnlActions.ID = new System.Guid("d36918b8-4619-46ce-9a81-a22676107d5a");
-         this.pnlActions.Location = new System.Drawing.Point(457, 346);
+         this.pnlActions.Location = new System.Drawing.Point(457, 386);
          this.pnlActions.Name = "pnlActions";
          this.pnlActions.OriginalSize = new System.Drawing.Size(200, 163);
-         this.pnlActions.Size = new System.Drawing.Size(444, 163);
+         this.pnlActions.Size = new System.Drawing.Size(421, 163);
          this.pnlActions.Text = "CR Actions";
          // 
          // dockPanel3_Container
@@ -235,7 +235,7 @@
          this.dockPanel3_Container.Controls.Add(this.grdCRActions);
          this.dockPanel3_Container.Location = new System.Drawing.Point(4, 23);
          this.dockPanel3_Container.Name = "dockPanel3_Container";
-         this.dockPanel3_Container.Size = new System.Drawing.Size(436, 136);
+         this.dockPanel3_Container.Size = new System.Drawing.Size(413, 136);
          this.dockPanel3_Container.TabIndex = 0;
          // 
          // grdCRActions
@@ -245,7 +245,7 @@
          this.grdCRActions.MainView = this.gridView2;
          this.grdCRActions.MenuManager = this.ribbonControl1;
          this.grdCRActions.Name = "grdCRActions";
-         this.grdCRActions.Size = new System.Drawing.Size(436, 136);
+         this.grdCRActions.Size = new System.Drawing.Size(413, 136);
          this.grdCRActions.TabIndex = 0;
          this.grdCRActions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -277,7 +277,7 @@
          this.ribbonControl1.Name = "ribbonControl1";
          this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
-         this.ribbonControl1.Size = new System.Drawing.Size(901, 141);
+         this.ribbonControl1.Size = new System.Drawing.Size(878, 141);
          // 
          // btnSaveCR
          // 
@@ -427,7 +427,7 @@
          this.controlContainer1.Controls.Add(this.propertyGridControl1);
          this.controlContainer1.Location = new System.Drawing.Point(0, 0);
          this.controlContainer1.Name = "controlContainer1";
-         this.controlContainer1.Size = new System.Drawing.Size(438, 177);
+         this.controlContainer1.Size = new System.Drawing.Size(415, 217);
          this.controlContainer1.TabIndex = 0;
          // 
          // propertyGridControl1
@@ -436,7 +436,7 @@
          this.propertyGridControl1.Location = new System.Drawing.Point(0, 0);
          this.propertyGridControl1.Name = "propertyGridControl1";
          this.propertyGridControl1.OptionsBehavior.Editable = false;
-         this.propertyGridControl1.Size = new System.Drawing.Size(438, 177);
+         this.propertyGridControl1.Size = new System.Drawing.Size(415, 217);
          this.propertyGridControl1.TabIndex = 0;
          // 
          // documentManager1
@@ -476,7 +476,7 @@
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(901, 509);
+         this.ClientSize = new System.Drawing.Size(878, 549);
          this.Controls.Add(this.pnlActions);
          this.Controls.Add(this.pnlCRTree);
          this.Controls.Add(this.ribbonControl1);

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-   <projects path="f:\temp" />
+   <projects path="C:\QCS Projects" />
    <environments>
       <environment type="Dev">
          <!--<sqlserver name="JATHANAS\SQLEXPRESS">-->
@@ -11,6 +11,7 @@
                <database name="QBCollection_Plus_6_8" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_7" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_5" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_6_4_121" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_4" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_3" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_2" integratedsecurity="true"/>

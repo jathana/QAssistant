@@ -439,14 +439,17 @@ namespace QAssistant
       private void frmCREditor_FormClosing(object sender, FormClosingEventArgs e)
       {
          // check for changes
-         string currentXml = docCR.Serialize();
-         if(!initialXml.Equals(currentXml))
+         if (docCR != null)
          {
-            DialogResult res = XtraMessageBox.Show("Save changes?", "Save", MessageBoxButtons.YesNoCancel);
-            switch(res)
+            string currentXml = docCR.Serialize();
+            if (!initialXml.Equals(currentXml))
             {
-               case DialogResult.Cancel: e.Cancel = true; break;
-               case DialogResult.Yes: btnSaveCR_ItemClick(null,null); break;
+               DialogResult res = XtraMessageBox.Show("Save changes?", "Save", MessageBoxButtons.YesNoCancel);
+               switch (res)
+               {
+                  case DialogResult.Cancel: e.Cancel = true; break;
+                  case DialogResult.Yes: btnSaveCR_ItemClick(null, null); break;
+               }
             }
          }
       }
