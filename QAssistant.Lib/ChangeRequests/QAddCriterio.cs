@@ -109,7 +109,6 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.queues)
             {
                this.queues = value;
-               closedCases = false;
                NotifyPropertyChanged();
             }
          }
@@ -126,7 +125,6 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.dynamicQueues)
             {
                this.dynamicQueues = value;
-               closedCases = false;
                NotifyPropertyChanged();
             }
          }
@@ -144,7 +142,6 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.worklist)
             {
                this.worklist = value;
-               closedCases = false;
                NotifyPropertyChanged();
             }
          }
@@ -162,7 +159,6 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.revocation)
             {
                this.revocation = value;
-               closedCases = false;
                NotifyPropertyChanged();
             }
          }
@@ -180,7 +176,6 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.strategy)
             {
                this.strategy = value;
-               closedCases = false;
                NotifyPropertyChanged();
             }
          }
@@ -198,7 +193,6 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.decisionTree)
             {
                this.decisionTree = value;
-               closedCases = false;
                NotifyPropertyChanged();
             }
          }
@@ -250,7 +244,6 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.closedCases)
             {
                this.closedCases = value;
-               SetFlags(value);
                NotifyPropertyChanged();
             }
          }
@@ -640,7 +633,7 @@ namespace QAssistant.Lib.ChangeRequests
                bool tmpRevocation = (bool)tbRec.Rows[0]["CRI_REVOCATION"];
                bool tmpStrategy = (bool)tbRec.Rows[0]["CRI_STRATEGY"];
                bool tmpDecisionTree = (bool)tbRec.Rows[0]["CRI_DECISION_TREE"];
-               string tmpCategoryDesc = (string)tbRec.Rows[0]["CATEGORY_DESC"]; ;
+               string tmpCategoryDesc = (string)tbRec.Rows[0]["CATEGORY_DESC"]; 
                bool tmpIsCustomerLevel = (bool)tbRec.Rows[0]["CRI_IS_CUSTOMER_LEVEL"];
                bool tmpClosedCases = (bool)tbRec.Rows[0]["CRI_CLOSED_CASES"];
                retval = CheckSpecValue(CriterioType, tmpCriterioType, "Criterio Type") && retval;
@@ -648,7 +641,7 @@ namespace QAssistant.Lib.ChangeRequests
                retval = CheckSpecValue(DynamicQueues, tmpDynamicQueues, "DynamicQueues") && retval;
                retval = CheckSpecValue(Revocation, tmpRevocation, "Revocation") && retval;
                retval = CheckSpecValue(Strategy, tmpStrategy, "Strategy") && retval;
-               retval = CheckSpecValue(DecisionTree, tmpDecisionTree, "CategoryDesc") && retval;
+               retval = CheckSpecValue(DecisionTree, tmpDecisionTree, "DecisionTree") && retval;
                retval = CheckSpecValue(CategoryDesc, tmpCategoryDesc, "CategoryDesc") && retval;
                retval = CheckSpecValue(IsCustomerLevel, tmpIsCustomerLevel, "IsCustomerLevel") && retval;
                retval = CheckSpecValue(ClosedCases, tmpClosedCases, "ClosedCases") && retval;
@@ -674,6 +667,8 @@ namespace QAssistant.Lib.ChangeRequests
                   Description = string.Format("Found more than one criteria \"{0}\".", Name),
                   DatabaseName = this.DatabaseName
                };
+               Actions.Add(check);
+               retval = false;
             }
             
             // everything ok

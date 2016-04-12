@@ -423,7 +423,7 @@ namespace QAssistant
                   try
                   {
                      string script = cr.GetScripted();
-                     File.WriteAllText(Path.Combine(f.SelectedPath, cr.CriUniqueId, ".sql"), script, Encoding.Unicode);
+                     File.WriteAllText(Path.Combine(f.SelectedPath, cr.CriUniqueId + ".sql"), script, Encoding.Unicode);
                   }
                   catch(Exception ex)
                   {
