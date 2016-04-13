@@ -21,6 +21,7 @@ namespace QAssistant.Lib.ChangeRequests
       private QDatabaseName databaseName = new QDatabaseName();
       private string relatedDBObject = ""; // view/table/stored proc
       private int installationCode = 0;
+      private string versionValue = "#BASE_VERSION#";
       #endregion
 
       #region properties
@@ -130,6 +131,24 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
 
+      [Category(QConsts.CategoryRequired)]
+      public string VersionValue
+      {
+         get
+         {
+            return versionValue;
+         }
+
+         set
+         {
+            if (value != this.versionValue)
+            {
+               this.versionValue = value;
+               NotifyPropertyChanged();
+            }
+         }
+      }
+
       #endregion
 
       public QConfigureDUICR()
@@ -153,6 +172,8 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(RelatedDBObject), "RelatedDBObject is mandatory.");
          if (databaseName.IsInvalid())
             errors.Add(nameof(DatabaseName), "Check DatabaseName.");
+         if (string.IsNullOrEmpty(VersionValue))
+            errors.Add(nameof(VersionValue), "VersionValue is mandatory.");
 
          return errors.Count == 0;
       }
@@ -182,6 +203,7 @@ namespace QAssistant.Lib.ChangeRequests
             DatabaseName = new QDatabaseName(this.databaseName.FullName),
             InstallationCode = this.installationCode,
             DatasourceName = this.datasourceName,
+            VersionValue = this.versionValue,
             Parent = this.Parent
          };
 
@@ -229,15 +251,35 @@ namespace QAssistant.Lib.ChangeRequests
             // clear state
             ClearState();
 
-            string sql = @"SELECT DUI_CODE, DUI.DSRC_CODE, DUI_NAME, DSRC_NAME 
+            string sql = @"SELECT DUIP.INST_CODE, DUIV.DUIV_VERSION_VALUE, DUI.DUI_NAME, DUI.DUI_CODE, DSRC.DSRC_NAME, DSRC.DSRC_CODE, UIR.UIR_DESCRIPTION
                            FROM TLK_DYNAMICUI DUI
+                           INNER JOIN TLK_DYNAMICUI_DEPL_PROP DUIP
+                           ON DUIP.DUI_CODE = DUI.DUI_CODE AND DUIP.INST_CODE=@inst_code
+                           INNER JOIN TLK_DYNAMICUI_VERSIONS DUIV
+                           ON DUIV.DUIp_CODE=DUIP.DUIP_CODE
                            INNER JOIN TLK_DATASOURCES DSRC
                            ON DUI.DSRC_CODE = DSRC.DSRC_CODE
-                           WHERE DUI_NAME = @name";
+                           INNER JOIN TLK_UI_ROLES UIR
+                           ON UIR.UIR_INTERNAL_DESC=DUIV.DUIV_VERSION_VALUE AND UIR.UIR_DESCRIPTION=@version_value
+                           WHERE DUI.DUI_NAME=@dui_name";
+            if (VersionValue.Equals("#BASE_VERSION#"))
+            {
+               sql = @"SELECT DUIP.INST_CODE, DUIV.DUIV_VERSION_VALUE, DUI.DUI_NAME, DUI.DUI_CODE, DSRC.DSRC_NAME, DSRC.DSRC_CODE
+                           FROM TLK_DYNAMICUI DUI
+                           INNER JOIN TLK_DYNAMICUI_DEPL_PROP DUIP
+                           ON DUIP.DUI_CODE = DUI.DUI_CODE AND DUIP.INST_CODE=@inst_code
+                           INNER JOIN TLK_DYNAMICUI_VERSIONS DUIV 
+                           ON DUIV.DUIp_CODE=DUIP.DUIP_CODE AND DUIV.DUIV_VERSION_VALUE='#BASE_VERSION#'
+                           INNER JOIN TLK_DATASOURCES DSRC
+                           ON DUI.DSRC_CODE = DSRC.DSRC_CODE                           
+                           WHERE DUI.DUI_NAME=@dui_name";
+            }
 
-            QDatabase database = QInstance.Environments.GetDatabase(DatabaseName);
+               QDatabase database = QInstance.Environments.GetDatabase(DatabaseName);
             SqlCommand command = new SqlCommand(sql);
-            command.Parameters.Add("@name", SqlDbType.NVarChar, 50).Value=name;
+            command.Parameters.Add("@dui_name", SqlDbType.NVarChar, 50).Value=name;
+            command.Parameters.Add("@version_value", SqlDbType.NVarChar, 50).Value = versionValue;
+            command.Parameters.Add("@inst_code", SqlDbType.Int, 50).Value = installationCode;
             try
             {
                DataTable dt = database.ExecuteCommand(command);
@@ -295,7 +337,8 @@ namespace QAssistant.Lib.ChangeRequests
             w.WriteAttributeString("datasourcename", datasourceName);
             w.WriteAttributeString("databasename", DatabaseName.ToString());
             w.WriteAttributeString("installationcode", InstallationCode.ToString());
-            w.WriteAttributeString("relateddbobject", RelatedDBObject.ToString());
+            w.WriteAttributeString("relateddbobject", RelatedDBObject);
+            w.WriteAttributeString("versionvalue", VersionValue);
 
             foreach (QChangeRequest cr in Children)
             {
@@ -319,6 +362,7 @@ namespace QAssistant.Lib.ChangeRequests
          DatabaseName.FromString(Node.ReadString("databasename"));
          InstallationCode = Node.ReadInt("installationcode", 0);
          RelatedDBObject = Node.ReadString("relateddbobject");
+         versionValue = Node.ReadString("versionvalue");
 
          XmlNodeList children = Node.ChildNodes;
          Children.Clear();

@@ -169,7 +169,7 @@ namespace QAssistant.Lib.ChangeRequests
                QCRAction check = new QCRAction()
                {
                   State = QCRActionState.WellImplemented,
-                  ActionType = QCRActionType.NoAction,
+                  ActionType = QCRActionType.NoActionNeeded,
                   Description = string.Format("Add field {0} in view {1}", ColumnName, ViewName),
                   DatabaseName = this.DatabaseName
                };

@@ -53,15 +53,12 @@ namespace QAssistant.Lib.ChangeRequests
          {
             var children = ChangeRequest.Children.Where(C => C.GetType() == typeof(QAddDUIFieldCR) && 
                                                             ((QAddDUIFieldCR)C).FieldName == field.FieldName &&
-                                                            ((QAddDUIFieldCR)C).FieldCaption == field.FieldCaption &&
                                                             ((QAddDUIFieldCR)C).InstallationCode == installationCode).ToList();
             if (children == null || children.Count == 0)
             {
                // add child
                QAddDUIFieldCR newchild = ChangeRequest.AddNewChild<QAddDUIFieldCR>();
                newchild.FieldName = field.FieldName;
-               newchild.FieldCaption = field.FieldCaption;
-
             }
          }
       }

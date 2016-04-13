@@ -16,7 +16,6 @@ namespace QAssistant.Lib.ChangeRequests
 
       #region fields
       private string fieldName = "";
-      private string fieldCaption = "";
       #endregion
 
       #region properties
@@ -34,6 +33,20 @@ namespace QAssistant.Lib.ChangeRequests
             return retval;
          }
       }
+      [Category(QConsts.CategoryInherited)]
+      public string VersionValue
+      {
+         get
+         {
+            string retval = "";
+            if (Parent != null)
+            {
+               retval = ((QConfigureDUICR)Parent).VersionValue;
+            }
+            return retval;
+         }
+      }
+
 
       [Category(QConsts.CategoryInherited)]
       public string DynamicUIName
@@ -68,7 +81,7 @@ namespace QAssistant.Lib.ChangeRequests
       {
          get
          {
-            return string.Format("Configure datasource field \"{0}\"", FieldName);
+            return string.Format("Add field \"{0}\" to Dynamic UI \"{1}\".", FieldName, DynamicUIName);
          }
       }
 
@@ -89,22 +102,6 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
 
-      [Category(QConsts.CategoryRequired)]
-      public string FieldCaption
-      {
-         get
-         {
-            return fieldCaption;
-         }
-         set
-         {
-            if (value != this.fieldCaption)
-            {
-               this.fieldCaption = value;
-               NotifyPropertyChanged();
-            }
-         }
-      }
 
       [Category(QConsts.CategoryInherited)]
       public int InstallationCode
@@ -124,7 +121,6 @@ namespace QAssistant.Lib.ChangeRequests
       public QAddDUIFieldCR()
       {
          FieldName = "";
-         FieldCaption = "";
       }
 
       #region methods
@@ -134,8 +130,6 @@ namespace QAssistant.Lib.ChangeRequests
          errors = new Dictionary<string, string>();
          if (string.IsNullOrEmpty(fieldName))
             errors.Add(nameof(FieldName), "Field name is mandatory.");
-         if (string.IsNullOrEmpty(fieldCaption))
-            errors.Add(nameof(FieldCaption), "Field caption is mandatory.");
          return errors.Count == 0;
       }
 
@@ -155,7 +149,6 @@ namespace QAssistant.Lib.ChangeRequests
          QAddDUIFieldCR retval = new QAddDUIFieldCR()
          {
             FieldName = this.fieldName,
-            FieldCaption = this.fieldCaption,
             Parent = this.Parent
          };
          foreach (QChangeRequest child in this.Children)
@@ -187,48 +180,43 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
 
-      private SqlCommand GetInstUIFieldsCountCommand()
-      {
-
-         string sql = @"SELECT COUNT(*)
-                        FROM TLK_DATASOURCES_FIELDS DSF
-                        INNER JOIN TLK_DATASOURCES DSRC
-                        ON DSRC.DSRC_CODE=DSF.DSRC_CODE
-                        AND DSRC.DSRC_NAME = @dsrc_name
-                        INNER JOIN TLK_DATASOURCES_FIELDS_UI DSFU
-                        ON DSF.DSF_CODE=DSFU.DSF_CODE 
-                        AND (DSFU.INST_CODE=@inst_code)";
-         SqlCommand command = new SqlCommand(sql);
-         command.Parameters.Add("@dsrc_name", SqlDbType.NVarChar, 50).Value = DatasourceName;
-         command.Parameters.Add("@inst_code", SqlDbType.Int).Value = InstallationCode;
-
-         return command;
-      }
-
       private SqlCommand GetInstUiFieldCommand()
       {
-         string sql = @"SELECT DSRC.DSRC_NAME, DSRC.DSRC_CODE, 
-                        DSFU.DSF_CODE, DSFU.INST_CODE, DSFU.DSFU_UI_VISIBLE, DSFU.DSFU_UI_IN_QBE, DSFU.DSFU_UI_CAPTION, 
-                        DSF.DSF_FIELDNAME, DSF.DSF_ACTIVE, DSF.DSF_INTERNAL 
-                        FROM TLK_DATASOURCES_FIELDS DSF
-                        INNER JOIN TLK_DATASOURCES DSRC
-                        ON DSRC.DSRC_CODE=DSF.DSRC_CODE
-                        AND DSRC.DSRC_NAME LIKE @dsrc_name
-                        INNER JOIN TLK_DATASOURCES_FIELDS_UI DSFU
-                        ON DSF.DSF_CODE=DSFU.DSF_CODE 
-                        AND (DSFU.INST_CODE=@inst_code OR DSFU.INST_CODE IS NULL)
-                        AND DSF.DSF_FIELDNAME=@field_name
-                        AND DSFU.DSFU_UI_CAPTION=@field_caption";
+         string sql = @"SELECT DUIP.INST_CODE, DUIV.DUIV_VERSION_VALUE, DUI.DUI_NAME, DUI.DUI_CODE
+                        FROM TLK_DYNAMICUI_FIELDS DUIF
+                        INNER JOIN TLK_DYNAMICUI_VERSIONS DUIV
+                        ON DUIF.DUIV_CODE=DUIV.DUIV_CODE
+                        INNER JOIN TLK_DATASOURCES_FIELDS DSF
+                        ON DSF.DSF_CODE=DUIF.DSF_CODE AND DSF.DSF_FIELDNAME=@field_name
+                        INNER JOIN TLK_DYNAMICUI_DEPL_PROP DUIP
+                        ON DUIP.DUIP_CODE = DUIV.DUIP_CODE AND DUIP.INST_CODE=@inst_code
+                        INNER JOIN TLK_DYNAMICUI DUI
+                        ON DUI.DUI_CODE=DUIP.DUI_CODE AND DUI.DUI_NAME=@dui_name
+                        INNER JOIN TLK_UI_ROLES UIR
+                        ON UIR.UIR_INTERNAL_DESC=DUIV.DUIV_VERSION_VALUE AND UIR.UIR_DESCRIPTION=@version_value";
+         if(VersionValue.Equals("#BASE_VERSION#"))
+         {
+               sql = @"SELECT DUIP.INST_CODE, DUIV.DUIV_VERSION_VALUE, DUI.DUI_NAME, DUI.DUI_CODE, DSRC.DSRC_NAME, DSRC.DSRC_CODE
+                     FROM TLK_DYNAMICUI DUI
+                     INNER JOIN TLK_DYNAMICUI_DEPL_PROP DUIP
+                     ON DUIP.DUI_CODE = DUI.DUI_CODE AND DUIP.INST_CODE=@inst_code
+                     INNER JOIN TLK_DYNAMICUI_VERSIONS DUIV
+                     ON DUIV.DUIP_CODE=DUIP.DUIP_CODE AND DUIV.DUIV_VERSION_VALUE='#BASE_VERSION#'
+                     INNER JOIN TLK_DATASOURCES DSRC
+                     ON DUI.DSRC_CODE = DSRC.DSRC_CODE
+                     WHERE DUI.DUI_NAME=@dui_name";
+         }
          SqlCommand command = new SqlCommand(sql);
 
-         command.Parameters.Add("@dsrc_name", SqlDbType.NVarChar, 50).Value = DatasourceName;
+         command.Parameters.Add("@version_value", SqlDbType.NVarChar, 50).Value = VersionValue;
          command.Parameters.Add("@field_name", SqlDbType.NVarChar, 50).Value = FieldName;
-         command.Parameters.Add("@field_caption", SqlDbType.NVarChar, 250).Value = FieldCaption;
+         command.Parameters.Add("@dui_name", SqlDbType.NVarChar, 50).Value = DynamicUIName;
          command.Parameters.Add("@inst_code", SqlDbType.Int).Value = InstallationCode;
 
          return command;
       }
 
+      
       #endregion
 
       #region Serialization
@@ -242,7 +230,6 @@ namespace QAssistant.Lib.ChangeRequests
             w.WriteStartElement(GetType().Name);
             base.Serialize(w);
             w.WriteAttributeString("fieldname", FieldName);
-            w.WriteAttributeString("fieldcaption", FieldCaption);
 
             w.WriteEndElement();
             w.Flush();
@@ -255,7 +242,6 @@ namespace QAssistant.Lib.ChangeRequests
       {
          base.Deserialize(Node);
          FieldName = Node.ReadString("fieldname", "");
-         FieldCaption = Node.ReadString("fieldcaption");
 
       }
 
@@ -276,114 +262,62 @@ namespace QAssistant.Lib.ChangeRequests
       private bool CheckRec()
       {
          bool retval = true;
-         try
-         {
-            QDatabase database = QInstance.Environments.GetDatabase(DatabaseName);
-            // first check if the field ui record exists 
-            DataTable tbRec = database.ExecuteCommand(GetInstUiFieldCommand());
-            if (tbRec.Rows.Count == 0)
+         
+            try
+            {
+               // do not check LCY fields
+               if (!fieldName.EndsWith("_LCY"))
+               {
+                  QDatabase database = QInstance.Environments.GetDatabase(DatabaseName);
+                  // first check if the field ui record exists 
+                  DataTable tbRec = database.ExecuteCommand(GetInstUiFieldCommand());
+                  if (tbRec.Rows.Count == 0)
+                  {
+                     QCRAction check = new QCRAction()
+                     {
+                        State = QCRActionState.NeedsAction,
+                        ActionType = QCRActionType.CheckDatasourceField,
+                        Description = string.Format("Add field \"{0}\" to Dynamic UI \"{1}\".", FieldName, DynamicUIName),
+                        DatabaseName = this.DatabaseName
+                     };
+                     Actions.Add(check);
+                     retval = false;
+                  }
+               }
+               // everything ok
+               if (Actions.Count == 0)
+               {
+                  QCRAction check = new QCRAction()
+                  {
+                     State = QCRActionState.WellImplemented,
+                     ActionType = QCRActionType.NoActionNeeded,
+                     Description = string.Format("Add field \"{0}\" to Dynamic UI \"{1}\".", FieldName, DynamicUIName),
+                     DatabaseName = this.DatabaseName
+                  };
+                  Actions.Add(check);
+                  retval = true;
+               }
+
+
+            }
+            catch (Exception ex)
             {
                QCRAction check = new QCRAction()
                {
                   State = QCRActionState.NeedsAction,
-                  ActionType = QCRActionType.CheckDatasourceField,
-                  Description = string.Format("The datasource \"{0}\" does not contain the field \"{1}\".", DatasourceName, FieldName),
+                  ActionType = QCRActionType.CheckDUIField,
+                  Description = string.Format(ex.Message),
                   DatabaseName = this.DatabaseName
                };
                Actions.Add(check);
                retval = false;
             }
-            else if (tbRec.Rows.Count > 0)
-            {
-               // check if there are  fields in the specific installation.
-               int count = (int)database.ExecuteScalar(GetInstUIFieldsCountCommand());
-               // check if fields exists
-               DataRow[] row = tbRec.Select(string.Format("INST_CODE = {0}", InstallationCode));
-               if (row.Length == 0 && count > 0)
-               {
-                  QCRAction check = new QCRAction()
-                  {
-                     State = QCRActionState.NeedsAction,
-                     ActionType = QCRActionType.CheckDatasourceField,
-                     Description = string.Format("The datasource \"{0}\" contain the field \"{1}\" for the default installation only.Override for \"{2}\"", DatasourceName, FieldName, InstallationCode),
-                     DatabaseName = this.DatabaseName
-                  };
-                  Actions.Add(check);
-                  retval = false;
-               }
-               if (row.Length == 1) // record found  
-               {
-                  // check active flag
-                  if (!((bool)row[0]["DSF_ACTIVE"]))
-                  {
-                     QCRAction check = new QCRAction()
-                     {
-                        State = QCRActionState.NeedsAction,
-                        ActionType = QCRActionType.CheckDatasourceField,
-                        Description = string.Format("The field \"{0}\" in datasource \"{1}\" for the installation \"{2}\" is not active.", FieldName, DatasourceName, InstallationCode),
-                        DatabaseName = this.DatabaseName
-                     };
-                     Actions.Add(check);
-                     retval = false;
-                  }
-                  // check visible in ui flag
-                  if (!((bool)row[0]["DSFU_UI_VISIBLE"]))
-                  {
-                     QCRAction check = new QCRAction()
-                     {
-                        State = QCRActionState.NeedsAction,
-                        ActionType = QCRActionType.CheckDatasourceField,
-                        Description = string.Format("The field \"{0}\" in datasource \"{1}\" for the installation \"{2}\" is not visible in ui.", FieldName, DatasourceName, InstallationCode),
-                        DatabaseName = this.DatabaseName
-                     };
-                     Actions.Add(check);
-                     retval = false;
-                  }
-                  // check caption
-                  if (((string)row[0]["DSFU_UI_CAPTION"]) != FieldCaption)
-                  {
-                     QCRAction check = new QCRAction()
-                     {
-                        State = QCRActionState.NeedsAction,
-                        ActionType = QCRActionType.CheckDatasourceField,
-                        Description = string.Format("The field \"{0}\" in datasource \"{1}\" for the installation \"{2}\" has different caption than the specification.", FieldName, DatasourceName, InstallationCode),
-                        DatabaseName = this.DatabaseName
-                     };
-                     Actions.Add(check);
-                     retval = false;
-                  }
-               }
-            }
-            // everything ok
-            if(Actions.Count==0)
-            {
-               QCRAction check = new QCRAction()
-               {
-                  State = QCRActionState.WellImplemented,
-                  ActionType = QCRActionType.CheckDUIField,
-                  Description = string.Format("Add field \"{0}\" to Dynamic UI \"{1}\".", FieldName, DynamicUIName),
-                  DatabaseName = this.DatabaseName
-               };
-               Actions.Add(check);
-               retval = true;
-            }
-
-
-         }
-         catch (Exception ex)
-         {
-            QCRAction check = new QCRAction()
-            {
-               State = QCRActionState.NeedsAction,
-               ActionType = QCRActionType.CheckDUIField,
-               Description = string.Format(ex.Message),
-               DatabaseName = this.DatabaseName
-            };
-            Actions.Add(check);
-            retval = false;
-         }
+         
          return retval;
       }
+
+      
+
    }
 
       #endregion

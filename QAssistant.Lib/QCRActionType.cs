@@ -8,7 +8,7 @@ namespace QAssistant.Lib
 {
    public enum QCRActionType
    {
-      NoAction,
+      NoActionNeeded,
       AddColumn,
       AddView,
       AddTable,

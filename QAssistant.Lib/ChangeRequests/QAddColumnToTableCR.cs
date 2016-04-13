@@ -177,7 +177,7 @@ namespace QAssistant.Lib.ChangeRequests
                QCRAction check = new QCRAction()
                {
                   State = QCRActionState.WellImplemented,
-                  ActionType = QCRActionType.NoAction,
+                  ActionType = QCRActionType.NoActionNeeded,
                   Description = this.Description,
                   DatabaseName = this.DatabaseName
                };
