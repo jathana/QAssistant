@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.Data.v15.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.Utils.v15.2.dll</HintPath>
@@ -37,6 +41,10 @@
     <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.XtraEditors.v15.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.XtraLayout.v15.2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
@@ -81,6 +89,7 @@
     <Compile Include="IModifier.cs" />
     <Compile Include="IStateHandler.cs" />
     <Compile Include="IValidatable.cs" />
+    <Compile Include="QCollection.cs" />
     <Compile Include="QCRCheckResultType.cs" />
     <Compile Include="QCriterioType.cs" />
     <Compile Include="QDatabaseName.cs" />
@@ -111,9 +120,22 @@
     <Compile Include="QSQLServers.cs" />
     <Compile Include="QTableFieldsHelper.cs" />
     <Compile Include="QTableScripter.cs" />
+    <Compile Include="TypeEditors\frmAvailableSelectedCollectionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TypeEditors\frmAvailableSelectedCollectionEditor.Designer.cs">
+      <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypeEditors\QCollectionTypeEditor.cs" />
     <Compile Include="TypeEditors\QDatabaseNamesTypeEditor.cs" />
     <Compile Include="TypeEditors\QDatabaseNameTypeEditor.cs" />
     <Compile Include="XmlNodeExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="TypeEditors\frmAvailableSelectedCollectionEditor.resx">
+      <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

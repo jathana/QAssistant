@@ -85,12 +85,6 @@
     <Compile Include="frmAddFields.Designer.cs">
       <DependentUpon>frmAddFields.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAvailableSelectedCollectionEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAvailableSelectedCollectionEditor.Designer.cs">
-      <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmModifier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,9 +140,6 @@
     </Compile>
     <EmbeddedResource Include="frmAddFields.resx">
       <DependentUpon>frmAddFields.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAvailableSelectedCollectionEditor.resx">
-      <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifier.resx">
       <DependentUpon>frmModifier.cs</DependentUpon>
