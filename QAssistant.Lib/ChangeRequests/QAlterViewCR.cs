@@ -72,6 +72,7 @@ namespace QAssistant.Lib.ChangeRequests
       public QAlterViewCR():base()
       {
          SetCompatibleChildren();
+         needsChildren = true;
       }
 
 
@@ -236,9 +237,7 @@ namespace QAssistant.Lib.ChangeRequests
       #region Checks
       public override bool Check()
       {
-         bool result = true;
-         Actions.Clear();
-
+         bool result = base.Check();
          
          // check children
          foreach(QChangeRequest cr in Children)

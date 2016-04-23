@@ -293,8 +293,7 @@ namespace QAssistant.Lib.ChangeRequests
       #region checks
       public override bool Check()
       {
-         bool result = true;
-         Actions.Clear();
+         bool result = base.Check();
 
          result = CheckRec() && result;
          NotifyPropertyChanged(nameof(CheckResultType));

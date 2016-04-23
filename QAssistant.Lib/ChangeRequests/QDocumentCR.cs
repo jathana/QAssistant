@@ -76,6 +76,7 @@ namespace QAssistant.Lib.ChangeRequests
          //ChangeRequestType = QChangeRequestType.Document;         
          AddRootNode();
          SetCompatibleChildren();
+         needsChildren = true;
       }
 
       #region methods
@@ -229,8 +230,8 @@ namespace QAssistant.Lib.ChangeRequests
       #region Checks
       public override bool Check()
       {
-         bool result = true;
-         Actions.Clear();
+         bool result = base.Check();
+        
          // check children
          foreach (QChangeRequest cr in Children)
          {

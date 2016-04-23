@@ -129,6 +129,7 @@ namespace QAssistant.Lib.ChangeRequests
       public QConfigureDatasourceCR()
       {
          SetCompatibleChildren();
+         needsChildren = true;
       }
 
 
@@ -327,8 +328,8 @@ namespace QAssistant.Lib.ChangeRequests
       #region checks
       public override bool Check()
       {
-         bool result = true;
-         Actions.Clear();
+         bool result = base.Check();
+         
          // check children
          foreach (QChangeRequest cr in Children)
          {

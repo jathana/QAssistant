@@ -159,7 +159,7 @@ namespace QAssistant.Lib.ChangeRequests
       #region Checks
       public override bool Check()
       {
-         bool result = true;
+         bool result = base.Check();
          Actions.Clear();
          // check children
          foreach (QChangeRequest cr in Children)
