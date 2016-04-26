@@ -149,8 +149,7 @@ namespace QAssistant.Lib.ChangeRequests
       #region Checks
       public override bool Check()
       {
-         bool result = true;
-         Actions.Clear();
+         bool result = base.Check();
          result = ColumnExists() && result;
          NotifyPropertyChanged(nameof(CheckResultType));
          return result;

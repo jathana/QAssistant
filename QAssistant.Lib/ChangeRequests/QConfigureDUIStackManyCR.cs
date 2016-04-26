@@ -162,6 +162,7 @@ namespace QAssistant.Lib.ChangeRequests
          fieldsToAdd.ListChanged += FieldsToAdd_ListChanged;
       
          SetCompatibleChildren();
+         needsChildren = true;
       }
 
       void SetCompatibleChildren()
@@ -363,8 +364,8 @@ namespace QAssistant.Lib.ChangeRequests
       #region Checks
       public override bool Check()
       {
-         bool result = true;
-         Actions.Clear();
+         bool result = base.Check();
+         
          // check children
          foreach (QChangeRequest cr in Children)
          {

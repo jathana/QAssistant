@@ -18,11 +18,15 @@ namespace QAssistant.Lib.ChangeRequests
 
       #region fields
       protected List<Type> compatibleChildren = new List<Type>();
-
+      protected bool needsChildren = false;
       #endregion
 
       #region properties
+
       
+      
+
+
       [Browsable(false)]
       public string Id { get; set; }
       //[Category("Inherited")]
@@ -43,6 +47,9 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
 
+
+
+
       public virtual string Description { get;  }
       [Browsable(false)]
       public List<QCRAction> Actions { get; set; }
@@ -56,6 +63,15 @@ namespace QAssistant.Lib.ChangeRequests
          get
          {
             return compatibleChildren;
+         }
+      }
+
+      [Browsable(false)]
+      protected bool NeedsChildren
+      {
+         get
+         {
+            return needsChildren;
          }
       }
       #endregion
@@ -74,7 +90,41 @@ namespace QAssistant.Lib.ChangeRequests
       }
       #endregion
 
+
+      #region checks
+      protected bool CheckHasChildren()
+      {
+         bool retval = true;
+         if (Children.Count == 0)
+         {
+            QCRAction check = new QCRAction()
+            {
+               State = QCRActionState.NeedsAction,
+               ActionType = QCRActionType.AddCRChildren,
+               Description = "Add children change requests."
+            };
+            Actions.Add(check);
+            retval = false;
+         }
+         return retval;
+      }
+
+      public virtual bool Check()
+      {
+         bool retval = true;
+
+         Actions.Clear();
+         if (needsChildren)
+         {
+            retval = CheckHasChildren() && retval; ;
+         }
+
+         return retval;
+      }
+      #endregion
+
       #region methods
+
       public void Dispose()
       {
          Children.Clear();
@@ -100,7 +150,7 @@ namespace QAssistant.Lib.ChangeRequests
       public abstract object Clone();
       public abstract bool Validate(out Dictionary<string, string> errors);
       public abstract void CopyState(object source);
-      public virtual bool Check() { return true; }
+      
       public virtual string Serialize() { return ""; }
       public virtual void Deserialize(XmlNode Node)
       {

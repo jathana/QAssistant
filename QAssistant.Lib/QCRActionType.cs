@@ -18,7 +18,8 @@ namespace QAssistant.Lib
       CheckDUIField,
       CheckDUI,
       AddCriterio,
-      CheckCriterio
+      CheckCriterio,
+      AddCRChildren
 
    }
 }
