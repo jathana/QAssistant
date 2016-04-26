@@ -20,7 +20,7 @@ namespace QAssistant.Lib
       public void FromXml(XmlNode node)
       {
          EnvType = node.ReadEnum<QEnvironmentType>("type");
-         XmlNodeList srvs = node.SelectNodes("//sqlserver");
+         XmlNodeList srvs = node.SelectNodes("sqlserver");
          foreach (XmlNode srv in srvs)
          {
             QSQLServer sql = new QSQLServer();

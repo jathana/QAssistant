@@ -34,11 +34,11 @@ namespace QAssistant
          // cbo Target database
          cboSourceDB.Properties.DisplayMember = "FullName";
          cboSourceDB.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FullName"));
-         cboSourceDB.Properties.DataSource = QInstance.Environments.GetDatabaseNames(QEnvironmentType.Dev);
+         cboSourceDB.Properties.DataSource = QInstance.Environments.GetDatabaseNames(QEnvironmentType.All);
 
          cboDestDB.Properties.DisplayMember = "FullName";
          cboDestDB.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FullName"));
-         cboDestDB.Properties.DataSource = QInstance.Environments.GetDatabaseNames(QEnvironmentType.Dev);
+         cboDestDB.Properties.DataSource = QInstance.Environments.GetDatabaseNames(QEnvironmentType.All);
       }
 
       private void SetMatchedCols()

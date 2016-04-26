@@ -24,6 +24,18 @@
                <database name="QBCollection_Plus_5_5" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
             </databases>
          </sqlserver>
+      </environment>
+      <environment type="Test">
+         <sqlserver name="Q-SRV-DEVFPS">
+            <databases>
+               <database name="QBCollection_Plus_FUIB_UA_6_8" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
+            </databases>
+         </sqlserver>
+         <sqlserver name="Q-SRV-BI2K5">
+            <databases>
+               <database name="QBCollection_Plus_FUIB_UA_5_5" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
+            </databases>
+         </sqlserver>
 
       </environment>
    </environments>

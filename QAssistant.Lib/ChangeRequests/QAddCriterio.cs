@@ -751,7 +751,7 @@ namespace QAssistant.Lib.ChangeRequests
                QCRAction check = new QCRAction()
                {
                   State = QCRActionState.WellImplemented,
-                  ActionType = QCRActionType.AddCriterio,
+                  ActionType = QCRActionType.NoActionNeeded,
                   Description = string.Format("Add criterio \"{0}\".", Name),
                   DatabaseName = this.DatabaseName
                };
