@@ -94,6 +94,7 @@
     <Compile Include="QCriterioType.cs" />
     <Compile Include="QDatabaseName.cs" />
     <Compile Include="QDatabaseNames.cs" />
+    <Compile Include="QDataComparer2.cs" />
     <Compile Include="QDataComparer.cs" />
     <Compile Include="QDataDiff.cs" />
     <Compile Include="QDataDiffs.cs" />

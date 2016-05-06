@@ -51,69 +51,6 @@ namespace QAssistant.Lib
 
          #endregion
       }
-
-      //public DataSet CompareQueryData(QDatabaseName sourceDBName, string sourceStatement,
-      //                                QDatabaseName destDBName,   string destStatement)
-      //{
-      //   DataSet retval = new DataSet();
-         
-      //   QDatabase sourceDB = QInstance.Environments.GetDatabase(sourceDBName);
-      //   QDatabase destDB = QInstance.Environments.GetDatabase(destDBName);
-      //   DataSet sourceDS = sourceDB.ExecuteQuery(sourceStatement);
-      //   DataSet destDS = destDB.ExecuteQuery(destStatement);
-
-      //   DataTable sourceTb = sourceDS.Tables[0];
-      //   DataTable destTb = destDS.Tables[0];
-
-      //   DataTable sourceUnmatched = null;
-      //   DataTable destUnmatched = null;
-      //   DataTable matched = null;
-      //   DataTable info = new DataTable("INFORMATION");
-      //   info.Columns.Add("SOURCE_ONLY_COLS", typeof(string));
-      //   info.Columns.Add("DEST_ONLY_COLS", typeof(string));
-      //   info.Columns.Add("COMMON_COLS", typeof(string));
-      //   info.Columns.Add("SOURCE_MATCHED", typeof(string));
-      //   info.Columns.Add("DEST_MATCHED", typeof(string));
-      //   info.Columns.Add("SOURCE_NOT_MATCHED", typeof(string));
-      //   info.Columns.Add("DEST_NOT_MATCHED", typeof(string));
-
-      //   var commonColumns = (sourceTb.Columns.OfType<DataColumn>().Intersect(destTb.Columns.OfType<DataColumn>(), new DataColumnComparer())).ToArray().Select(C => C.ColumnName).ToArray(); 
-      //   var sourceColsOnly = (sourceTb.Columns.OfType<DataColumn>().Except(destTb.Columns.OfType<DataColumn>(), new DataColumnComparer())).ToArray().Select(C=>C.ColumnName).ToArray();
-      //   var destColsOnly = (destTb.Columns.OfType<DataColumn>().Except(sourceTb.Columns.OfType<DataColumn>(), new DataColumnComparer())).ToArray().Select(C => C.ColumnName).ToArray(); 
-
-      //   foreach (string colName in sourceColsOnly) sourceTb.Columns.Remove(colName);
-      //   foreach (string colName in destColsOnly) destTb.Columns.Remove(colName);
-
-      //   try      { sourceUnmatched = sourceTb.AsEnumerable().Except(destTb.AsEnumerable(), DataRowComparer.Default).CopyToDataTable(); }
-      //   catch    { sourceUnmatched = new DataTable(); }
-      //   finally  { sourceUnmatched.TableName = "SOURCE_UNMATCHED"; }
-
-      //   try      { destUnmatched = destTb.AsEnumerable().Except(sourceTb.AsEnumerable(), DataRowComparer.Default).CopyToDataTable(); }
-      //   catch    { destUnmatched = new DataTable(); }
-      //   finally  { destUnmatched.TableName = "DEST_UNMATCHED"; }
-
-      //   try      { matched = sourceTb.AsEnumerable().Intersect(destTb.AsEnumerable(), DataRowComparer.Default).CopyToDataTable(); }
-      //   catch    { matched = new DataTable(); }
-      //   finally  { matched.TableName = "MATCHED"; }
-
-      //   DataRow row = info.NewRow();
-      //   row["SOURCE_ONLY_COLS"] = string.Join(",", sourceColsOnly);
-      //   row["DEST_ONLY_COLS"] = string.Join(",", destColsOnly);
-      //   row["COMMON_COLS"] = string.Join(",", commonColumns);
-      //   row["SOURCE_MATCHED"] = string.Format("Matched {0} of {1}.", matched.Rows.Count, sourceTb.Rows.Count);
-      //   row["DEST_MATCHED"] = string.Format("Matched {0} of {1}.", matched.Rows.Count, destTb.Rows.Count);
-      //   row["SOURCE_NOT_MATCHED"] = string.Format("Source not matched {0} of {1}.", sourceUnmatched.Rows.Count, sourceTb.Rows.Count);
-      //   row["DEST_NOT_MATCHED"] = string.Format("Dest not matched {0} of {1}.", destUnmatched.Rows.Count, destTb.Rows.Count);
-      //   info.Rows.Add(row);
-
-      //   retval.Tables.Add(sourceUnmatched);
-      //   retval.Tables.Add(destUnmatched);
-      //   retval.Tables.Add(matched);
-      //   retval.Tables.Add(info);
-
-      //   return retval;
-      //}
-
       
 
       public DataSet CompareQueryData(QDatabaseName sourceDBName, 
