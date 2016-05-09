@@ -153,7 +153,37 @@ namespace QAssistant.Lib
          retval.Tables.Add(destMatchedFull);
          retval.Tables.Add(info);
 
+         AddExtraColumns(sourceDBName, sourceStatement, sourceUnmatchedFull);
+         AddExtraColumns(sourceDBName, sourceStatement, sourceMatchedFull);
+
+         AddExtraColumns(destDBName, destStatement, destUnmatchedFull);
+         AddExtraColumns(destDBName, destStatement, destMatchedFull);
+
          return retval;
+      }
+
+
+      private void AddExtraColumns(QDatabaseName dbName, string statement, DataTable table)
+      {
+         const string dbnameCol = "__dbname__";
+         const string statCol = "__statement__";
+
+         if (!table.Columns.Contains(dbnameCol))
+         {
+            table.Columns.Add(dbnameCol, typeof(string));
+         }
+         if (!table.Columns.Contains(statCol))
+         {
+            table.Columns.Add(statCol, typeof(string));
+         }
+
+         foreach (DataRow row in table.Rows)
+         {
+            row.BeginEdit();
+            row[dbnameCol] = dbName.FullName;
+            row[statCol] = statement;
+            row.EndEdit();
+         }
       }
 
       /// <summary>

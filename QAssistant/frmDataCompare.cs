@@ -159,24 +159,34 @@ namespace QAssistant
          dirtyQueries = true;
       }
 
+
       private void btnExportSource_Click(object sender, EventArgs e)
       {
-         SaveFileDialog d = new SaveFileDialog();
-         d.Filter ="Excel files (*.xls)|*.xls|All files (*.*)|*.*";
-         if (d.ShowDialog() == DialogResult.OK)
-         {
-            grdSource.ExportToXls(d.FileName);
-         }
+         string fileName = string.Format("src_{0}.xls", DateTime.Now.ToString("yMMdd_HHmmssff"));
+         grdSource.ExportToXls(fileName);
+         System.Diagnostics.Process.Start(fileName);
+
+         //SaveFileDialog d = new SaveFileDialog();
+         //d.Filter ="Excel files (*.xls)|*.xls|All files (*.*)|*.*";
+         //if (d.ShowDialog() == DialogResult.OK)
+         //{
+         //   grdSource.ExportToXls(d.FileName);
+         //}
       }
 
       private void btnExportDest_Click(object sender, EventArgs e)
       {
-         SaveFileDialog d = new SaveFileDialog();
-         d.Filter = "Excel files (*.xls)|*.xls|All files (*.*)|*.*";
-         if (d.ShowDialog() == DialogResult.OK)
-         {
-            grdDest.ExportToXls(d.FileName);
-         }
+
+         string fileName = string.Format("dst_{0}.xls", DateTime.Now.ToString("yMMdd_HHmmssff"));
+         grdDest.ExportToXls(fileName);
+         System.Diagnostics.Process.Start(fileName);
+
+         //SaveFileDialog d = new SaveFileDialog();
+         //d.Filter = "Excel files (*.xls)|*.xls|All files (*.*)|*.*";
+         //if (d.ShowDialog() == DialogResult.OK)
+         //{
+         //   grdDest.ExportToXls(d.FileName);
+         //}
       }
 
       private void btnClearCols_Click(object sender, EventArgs e)
