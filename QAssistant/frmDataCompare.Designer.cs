@@ -29,6 +29,8 @@
       private void InitializeComponent()
       {
          this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+         this.txtOrderBy = new DevExpress.XtraEditors.TextEdit();
+         this.btnClearCols = new DevExpress.XtraEditors.SimpleButton();
          this.btnExportDest = new DevExpress.XtraEditors.SimpleButton();
          this.btnExportSource = new DevExpress.XtraEditors.SimpleButton();
          this.lstIncludeCols = new DevExpress.XtraEditors.CheckedListBoxControl();
@@ -57,12 +59,11 @@
          this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
          this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
          this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
-         this.btnClearCols = new DevExpress.XtraEditors.SimpleButton();
          this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-         this.txtOrderBy = new DevExpress.XtraEditors.TextEdit();
          this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
          this.layoutControl1.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.txtOrderBy.Properties)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.lstIncludeCols)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.grdInformation)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.viewInfo)).BeginInit();
@@ -89,7 +90,6 @@
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
-         ((System.ComponentModel.ISupportInitialize)(this.txtOrderBy.Properties)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
          this.SuspendLayout();
          // 
@@ -117,6 +117,24 @@
          this.layoutControl1.Size = new System.Drawing.Size(925, 568);
          this.layoutControl1.TabIndex = 0;
          this.layoutControl1.Text = "layoutControl1";
+         // 
+         // txtOrderBy
+         // 
+         this.txtOrderBy.Location = new System.Drawing.Point(545, 183);
+         this.txtOrderBy.Name = "txtOrderBy";
+         this.txtOrderBy.Size = new System.Drawing.Size(368, 20);
+         this.txtOrderBy.StyleController = this.layoutControl1;
+         this.txtOrderBy.TabIndex = 22;
+         // 
+         // btnClearCols
+         // 
+         this.btnClearCols.Location = new System.Drawing.Point(690, 131);
+         this.btnClearCols.Name = "btnClearCols";
+         this.btnClearCols.Size = new System.Drawing.Size(223, 22);
+         this.btnClearCols.StyleController = this.layoutControl1;
+         this.btnClearCols.TabIndex = 21;
+         this.btnClearCols.Text = "Uncheck All Columns";
+         this.btnClearCols.Click += new System.EventHandler(this.btnClearCols_Click);
          // 
          // btnExportDest
          // 
@@ -217,6 +235,8 @@
          // 
          this.memDest.Location = new System.Drawing.Point(545, 36);
          this.memDest.Name = "memDest";
+         this.memDest.Properties.Appearance.Font = new System.Drawing.Font("Courier New", 8.25F);
+         this.memDest.Properties.Appearance.Options.UseFont = true;
          this.memDest.Size = new System.Drawing.Size(368, 91);
          this.memDest.StyleController = this.layoutControl1;
          this.memDest.TabIndex = 10;
@@ -226,6 +246,8 @@
          // 
          this.memSource.Location = new System.Drawing.Point(93, 36);
          this.memSource.Name = "memSource";
+         this.memSource.Properties.Appearance.Font = new System.Drawing.Font("Courier New", 8.25F);
+         this.memSource.Properties.Appearance.Options.UseFont = true;
          this.memSource.Size = new System.Drawing.Size(367, 91);
          this.memSource.StyleController = this.layoutControl1;
          this.memSource.TabIndex = 9;
@@ -401,16 +423,6 @@
          this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
          this.layoutControlItem13.TextVisible = false;
          // 
-         // btnClearCols
-         // 
-         this.btnClearCols.Location = new System.Drawing.Point(690, 131);
-         this.btnClearCols.Name = "btnClearCols";
-         this.btnClearCols.Size = new System.Drawing.Size(223, 22);
-         this.btnClearCols.StyleController = this.layoutControl1;
-         this.btnClearCols.TabIndex = 21;
-         this.btnClearCols.Text = "Uncheck All Columns";
-         this.btnClearCols.Click += new System.EventHandler(this.btnClearCols_Click);
-         // 
          // layoutControlItem8
          // 
          this.layoutControlItem8.Control = this.btnClearCols;
@@ -419,14 +431,6 @@
          this.layoutControlItem8.Size = new System.Drawing.Size(227, 26);
          this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
          this.layoutControlItem8.TextVisible = false;
-         // 
-         // txtOrderBy
-         // 
-         this.txtOrderBy.Location = new System.Drawing.Point(545, 183);
-         this.txtOrderBy.Name = "txtOrderBy";
-         this.txtOrderBy.Size = new System.Drawing.Size(368, 20);
-         this.txtOrderBy.StyleController = this.layoutControl1;
-         this.txtOrderBy.TabIndex = 22;
          // 
          // layoutControlItem14
          // 
@@ -449,6 +453,7 @@
          this.Text = "frmDataCompare";
          ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
          this.layoutControl1.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.txtOrderBy.Properties)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.lstIncludeCols)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.grdInformation)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.viewInfo)).EndInit();
@@ -475,7 +480,6 @@
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
-         ((System.ComponentModel.ISupportInitialize)(this.txtOrderBy.Properties)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
          this.ResumeLayout(false);
 
