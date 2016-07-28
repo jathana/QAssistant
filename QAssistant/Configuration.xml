@@ -6,7 +6,8 @@
          <!--<sqlserver name="JATHANAS\SQLEXPRESS">-->
          <sqlserver name="q-srv-devel12">
             <databases>
-               <database name="QBCollection_Plus_CURRENT" integratedsecurity="true"/>         
+               <database name="QBCollection_Plus_CURRENT" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_6_10" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_9" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_8" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_7" integratedsecurity="true"/>
@@ -31,12 +32,27 @@
                <database name="QBCollection_Plus_FUIB_UA_6_8" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
             </databases>
          </sqlserver>
+
+         <sqlserver name="Q-SRV-DEVFPS\QBcnbg">
+            <databases>
+               <database name="QBCollection_Plus_ETBN_6_7" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
+            </databases>
+         </sqlserver>
+
+      
          <sqlserver name="Q-SRV-BI2K5">
             <databases>
                <database name="QBCollection_Plus_FUIB_UA_5_5" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
             </databases>
          </sqlserver>
-
       </environment>
+         <environment type="Live">
+         <sqlserver name="Q-SRV-QCSPILOTS">
+            <databases>
+               <database name="QBCollection_Plus_Pilot_NBG_LIVE" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
+            </databases>
+         </sqlserver>
+      </environment>
+
    </environments>
 </configuration>

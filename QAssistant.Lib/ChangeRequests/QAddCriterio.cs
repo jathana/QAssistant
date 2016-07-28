@@ -200,6 +200,7 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QCriterioCategoryTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string CategoryDesc
       {
          get
@@ -269,6 +270,7 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QInstallationCodeTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public int InstallationCode
       {
          get
@@ -287,6 +289,7 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QDBTablesViewsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string WhereTable
       {
          get
@@ -304,6 +307,7 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QDBTableViewFieldsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]      
       public string WhereField
       {
          get

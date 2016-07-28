@@ -28,6 +28,7 @@ namespace QAssistant.Lib.ChangeRequests
 
 
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QInstallationCodeTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public int InstallationCode
       {
          get
@@ -45,6 +46,7 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QDBTablesViewsSPsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string RelatedDBObject
       {
          get

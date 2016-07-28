@@ -22,6 +22,7 @@ namespace QAssistant.Lib.ChangeRequests
 
       #region properties
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QDBViewsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string ViewName
       {
          get

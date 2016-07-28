@@ -42,6 +42,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.XtraEditors.v15.2.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.XtraGrid.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files (x86)\DevExpress 15.2\Components\Bin\Framework\DevExpress.XtraLayout.v15.2.dll</HintPath>
@@ -128,6 +129,13 @@
       <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="TypeEditors\QCollectionTypeEditor.cs" />
+    <Compile Include="TypeEditors\QDBTablesViewsSPsTypeEditor.cs" />
+    <Compile Include="TypeEditors\QInstallationCodeTypeEditor.cs" />
+    <Compile Include="TypeEditors\QDBViewsTypeEditor.cs" />
+    <Compile Include="TypeEditors\QDBTableViewFieldsTypeEditor.cs" />
+    <Compile Include="TypeEditors\QDBTablesViewsTypeEditor.cs" />
+    <Compile Include="TypeEditors\QDBTablesTypeEditor.cs" />
+    <Compile Include="TypeEditors\QCriterioCategoryTypeEditor.cs" />
     <Compile Include="TypeEditors\QDatabaseNamesTypeEditor.cs" />
     <Compile Include="TypeEditors\QDatabaseNameTypeEditor.cs" />
     <Compile Include="XmlNodeExtensions.cs" />

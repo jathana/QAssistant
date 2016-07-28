@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QAssistant.Lib.TypeEditors;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +33,7 @@ namespace QAssistant.Lib.ChangeRequests
             fields = value;
          }
       }
-
+      [Editor(typeof(QInstallationCodeTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public int InstallationCode
       {
          get
