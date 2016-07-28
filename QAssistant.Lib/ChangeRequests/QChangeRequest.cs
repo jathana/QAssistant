@@ -116,7 +116,7 @@ namespace QAssistant.Lib.ChangeRequests
          Actions.Clear();
          if (needsChildren)
          {
-            retval = CheckHasChildren() && retval; ;
+            retval = CheckHasChildren() && retval; 
          }
 
          return retval;

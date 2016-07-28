@@ -40,6 +40,8 @@ namespace QAssistant
          addHandlers.Add(typeof(QAddColumnToViewCR), bbAdd_Child_ItemClick<QAddColumnToViewCR>);
          addHandlers.Add(typeof(QAddDatasourceFieldCR), bbAdd_Child_ItemClick<QAddDatasourceFieldCR>);
          addHandlers.Add(typeof(QAddCriterioCR), bbAdd_Child_ItemClick<QAddCriterioCR>);
+         addHandlers.Add(typeof(QPoolField), bbAdd_Child_ItemClick<QPoolField>);
+         addHandlers.Add(typeof(QPoolFields), bbAdd_Child_ItemClick<QPoolFields>);
 
          // edit handlers
          editHandlers.Add(typeof(QDocumentCR), trlCRTree_DoubleClick<QDocumentCR>);
@@ -54,6 +56,8 @@ namespace QAssistant
          editHandlers.Add(typeof(QAddColumnToViewCR), trlCRTree_DoubleClick<QAddColumnToViewCR>);
          editHandlers.Add(typeof(QAddDatasourceFieldCR), trlCRTree_DoubleClick<QAddDatasourceFieldCR>);
          editHandlers.Add(typeof(QAddCriterioCR), trlCRTree_DoubleClick<QAddCriterioCR>);
+         editHandlers.Add(typeof(QPoolField), trlCRTree_DoubleClick<QPoolField>);
+         editHandlers.Add(typeof(QPoolFields), trlCRTree_DoubleClick<QPoolFields>);
 
          // modifiers
          modifiers.Add(typeof(QAlterTableCR), ShowModifier_ItemClick<QAlterTableCRModifier>);

@@ -52,6 +52,7 @@ namespace QAssistant.Lib.ChangeRequests
             }
          }
       }
+
       [Browsable(false)]
       public QChangeRequests CRTree
       {
@@ -69,6 +70,8 @@ namespace QAssistant.Lib.ChangeRequests
             return string.Format("CR Document [{0}]", crName);
          }
       }
+
+
       #endregion
 
       public QDocumentCR() : base()
@@ -77,6 +80,7 @@ namespace QAssistant.Lib.ChangeRequests
          AddRootNode();
          SetCompatibleChildren();
          needsChildren = true;
+         AddNewChild<QPoolFields>();
       }
 
       #region methods
@@ -101,6 +105,8 @@ namespace QAssistant.Lib.ChangeRequests
          compatibleChildren.Add(typeof(QConfigureDUICR));
          compatibleChildren.Add(typeof(QConfigureDUIStackCR));
          compatibleChildren.Add(typeof(QAddCriterioCR));
+         compatibleChildren.Add(typeof(QPoolFields));
+
       }
 
 
@@ -148,8 +154,9 @@ namespace QAssistant.Lib.ChangeRequests
 
       private void AddRootNode()
       {
-         crTree = new QChangeRequests();
+         crTree = new QChangeRequests();        
          crTree.Add(this);
+         
       }
 
       public QChangeRequest GetCR(string Id)

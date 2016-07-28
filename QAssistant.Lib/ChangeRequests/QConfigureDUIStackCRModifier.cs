@@ -203,7 +203,7 @@ namespace QAssistant.Lib.ChangeRequests
                                                           ((QConfigureDUICR)c).InstallationCode == InstallationCode).ToList();
          if (duiChildren != null && duiChildren.Count > 0)
          {
-            foreach (QConfigureDUICR configureDatasourceCR in dsChildren)
+            foreach (QConfigureDUICR configureDatasourceCR in duiChildren)
             {
                QConfigureDUICRModifier configureDatasourceCRModifier = new QConfigureDUICRModifier();
                configureDatasourceCRModifier.ChangeRequest = configureDatasourceCR;

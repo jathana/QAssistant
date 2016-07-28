@@ -77,6 +77,8 @@
     <Compile Include="ChangeRequests\QAlterTableCR.cs" />
     <Compile Include="ChangeRequests\QChangeRequest.cs" />
     <Compile Include="ChangeRequests\QChangeRequests.cs" />
+    <Compile Include="ChangeRequests\QPoolField.cs" />
+    <Compile Include="ChangeRequests\QPoolFields.cs" />
     <Compile Include="ChangeRequests\QConfigureDUIStackManyCR.cs" />
     <Compile Include="ChangeRequests\QCRFactory.cs" />
     <Compile Include="ChangeRequests\QConfigureDUIStackCR.cs" />
