@@ -131,7 +131,9 @@
       <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="TypeEditors\QCollectionTypeEditor.cs" />
+    <Compile Include="TypeEditors\QPoolTablesTypeEditor.cs" />
     <Compile Include="TypeEditors\QDBTablesViewsSPsTypeEditor.cs" />
+    <Compile Include="TypeEditors\QPoolFieldsTypeEditor.cs" />
     <Compile Include="TypeEditors\QInstallationCodeTypeEditor.cs" />
     <Compile Include="TypeEditors\QDBViewsTypeEditor.cs" />
     <Compile Include="TypeEditors\QDBTableViewFieldsTypeEditor.cs" />

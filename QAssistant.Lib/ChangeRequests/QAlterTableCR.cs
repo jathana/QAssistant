@@ -22,7 +22,7 @@ namespace QAssistant.Lib.ChangeRequests
 
       #region properties
       [Category(QConsts.CategoryRequired)]
-      [Editor(typeof(QDBTablesTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
+      [Editor(typeof(QPoolTablesTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string TableName
       {
          get

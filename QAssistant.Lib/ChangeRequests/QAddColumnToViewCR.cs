@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QAssistant.Lib.TypeEditors;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace QAssistant.Lib.ChangeRequests
       #endregion
       #region properties
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QPoolFieldsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string ColumnName
       {
          get

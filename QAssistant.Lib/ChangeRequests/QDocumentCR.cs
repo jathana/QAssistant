@@ -84,6 +84,10 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       #region methods
+
+      
+
+
       public override bool Validate(out Dictionary<string, string> errors)
       {
          errors = new Dictionary<string, string>();

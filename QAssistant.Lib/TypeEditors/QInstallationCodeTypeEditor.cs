@@ -36,6 +36,7 @@ namespace QAssistant.Lib.TypeEditors
 
             if (edSvc != null)
             {
+               instCode = Convert.ToString(value);
                GridControl grd = new GridControl();
                GridView gview = new GridView(grd);
                GridColumn colCode = new GridColumn();

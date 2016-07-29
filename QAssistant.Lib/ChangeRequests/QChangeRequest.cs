@@ -23,10 +23,6 @@ namespace QAssistant.Lib.ChangeRequests
 
       #region properties
 
-      
-      
-
-
       [Browsable(false)]
       public string Id { get; set; }
       //[Category("Inherited")]
@@ -46,9 +42,6 @@ namespace QAssistant.Lib.ChangeRequests
             return retval;
          }
       }
-
-
-
 
       public virtual string Description { get;  }
       [Browsable(false)]
@@ -171,6 +164,25 @@ namespace QAssistant.Lib.ChangeRequests
          Children.Add(child);
       }
 
+
+      public QChangeRequest GetRoot()
+      {
+         QChangeRequest root = this;
+         while (root.Parent!=null)
+         {
+            root = root.Parent;
+         }
+         return root;
+      }
+
+
+      public List<T> GetDescendants<T>() where T: QChangeRequest
+      {
+         var nodes = Children.Concat(Children.SelectMany(n=>n.GetDescendants<T>()))
+                        .OfType<T>()
+                        .ToList<T>();
+         return nodes;
+      }
       #endregion
 
 
@@ -197,8 +209,6 @@ namespace QAssistant.Lib.ChangeRequests
          else
          {
             item.Children.Clear();
-
-            
          }
       }
 

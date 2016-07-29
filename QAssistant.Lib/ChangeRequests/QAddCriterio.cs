@@ -289,7 +289,7 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       [Category(QConsts.CategoryRequired)]
-      [Editor(typeof(QDBTablesViewsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
+      [Editor(typeof(QPoolTablesTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string WhereTable
       {
          get
@@ -307,7 +307,7 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       [Category(QConsts.CategoryRequired)]
-      [Editor(typeof(QDBTableViewFieldsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]      
+      [Editor(typeof(QPoolFieldsTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]      
       public string WhereField
       {
          get
