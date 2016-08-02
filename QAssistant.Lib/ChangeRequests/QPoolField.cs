@@ -115,6 +115,13 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(TableName), "Table name is mandatory.");
          if (string.IsNullOrEmpty(englishCaption))
             errors.Add(nameof(EnglishCaption), "English caption is mandatory.");
+         if (TableName.HasTrailingSpaces())
+            errors.Add(nameof(TableName), "Trailing spaces are not allowed.");
+         if (EnglishCaption.HasTrailingSpaces())
+            errors.Add(nameof(EnglishCaption), "Trailing spaces are not allowed.");
+         if (GreekCaption.HasTrailingSpaces())
+            errors.Add(nameof(GreekCaption), "Trailing spaces are not allowed.");
+
          return errors.Count == 0;
       }
 

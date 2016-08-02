@@ -28,14 +28,13 @@
       /// </summary>
       private void InitializeComponent()
       {
-         this.components = new System.ComponentModel.Container();
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCREditor));
          DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
          DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
          DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-         this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
-         this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
-         this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
+         this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup();
+         this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document();
+         this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
          this.pnlCRTree = new DevExpress.XtraBars.Docking.DockPanel();
          this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
          this.trlCRTree = new DevExpress.XtraTreeList.TreeList();
@@ -43,7 +42,7 @@
          this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          this.repositoryItemImageEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageEdit();
-         this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+         this.imageCollection1 = new DevExpress.Utils.ImageCollection();
          this.pnlActions = new DevExpress.XtraBars.Docking.DockPanel();
          this.dockPanel3_Container = new DevExpress.XtraBars.Docking.ControlContainer();
          this.grdCRActions = new DevExpress.XtraGrid.GridControl();
@@ -53,7 +52,7 @@
          this.btnCheckCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnCloseCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnAddChildCR = new DevExpress.XtraBars.BarButtonItem();
-         this.mnuAddChildCR = new DevExpress.XtraBars.PopupMenu(this.components);
+         this.mnuAddChildCR = new DevExpress.XtraBars.PopupMenu();
          this.btnAddGroupCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnAddViewCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnAlterTableCR = new DevExpress.XtraBars.BarButtonItem();
@@ -67,8 +66,8 @@
          this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
          this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
          this.propertyGridControl1 = new DevExpress.XtraVerticalGrid.PropertyGridControl();
-         this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
-         this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+         this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
+         this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
          this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();

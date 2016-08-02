@@ -177,6 +177,8 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(DatabaseName), "Check DatabaseName.");
          if (string.IsNullOrEmpty(VersionValue))
             errors.Add(nameof(VersionValue), "VersionValue is mandatory.");
+         if (RelatedDBObject.HasTrailingSpaces())
+            errors.Add(nameof(RelatedDBObject), "Trailing spaces are not allowed.");
 
          return errors.Count == 0;
       }

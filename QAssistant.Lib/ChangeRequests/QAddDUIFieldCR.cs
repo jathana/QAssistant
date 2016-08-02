@@ -130,6 +130,9 @@ namespace QAssistant.Lib.ChangeRequests
          errors = new Dictionary<string, string>();
          if (string.IsNullOrEmpty(fieldName))
             errors.Add(nameof(FieldName), "Field name is mandatory.");
+         if (FieldName.HasTrailingSpaces())
+            errors.Add(nameof(FieldName), "Trailing spaces are not allowed.");
+
          return errors.Count == 0;
       }
 

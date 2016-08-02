@@ -20,7 +20,7 @@ namespace QAssistant.Lib.ChangeRequests
       private string datasourceName="";
       private string dynamicUIName="";
       private string tableName="";
-      private QCRFields fieldsToAdd = new QCRFields();
+      private List<QPoolField> fieldsToAdd = new List<QPoolField>();
       private QDBObjectType dbObjectType = QDBObjectType.View;
 
       #endregion
@@ -28,7 +28,7 @@ namespace QAssistant.Lib.ChangeRequests
       #region properties
 
       [Category(QConsts.CategoryRequired)]
-      public QCRFields FieldsToAdd
+      public List<QPoolField> FieldsToAdd
       {
          get
          {
@@ -160,7 +160,7 @@ namespace QAssistant.Lib.ChangeRequests
       {
          databaseNamesForDUI.ListChanged += DatabaseNamesForDUI_ListChanged;
          databaseNames.ListChanged += DatabaseNames_ListChanged;
-         fieldsToAdd.ListChanged += FieldsToAdd_ListChanged;
+         //fieldsToAdd.ListChanged += FieldsToAdd_ListChanged;
       
          SetCompatibleChildren();
          needsChildren = true;
@@ -205,9 +205,9 @@ namespace QAssistant.Lib.ChangeRequests
             retval.databaseNames.Add(new QDatabaseName(dbName.FullName));
          }
 
-         foreach (QCRField fld in fieldsToAdd)
+         foreach (QPoolField fld in fieldsToAdd)
          {
-            retval.fieldsToAdd.Add(new QCRField(fld.FieldName, fld.FieldCaption));
+            retval.fieldsToAdd.Add(new QPoolField() { FieldName=fld.FieldName, EnglishCaption=fld.EnglishCaption });
          }
          foreach (QChangeRequest child in this.Children)
          {

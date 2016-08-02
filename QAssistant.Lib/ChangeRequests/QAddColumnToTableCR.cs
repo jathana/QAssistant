@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-
+using QAssistant.Lib;
 namespace QAssistant.Lib.ChangeRequests
 {
    public class QAddColumnToTableCR : QChangeRequest
@@ -84,7 +84,10 @@ namespace QAssistant.Lib.ChangeRequests
          errors = new Dictionary<string, string>();
         if (string.IsNullOrEmpty(ColumnName))
                errors.Add(nameof(ColumnName), "Column name is mandatory.");
-         
+         if (ColumnName.HasTrailingSpaces())
+            errors.Add(nameof(ColumnName), "Trailing spaces are not allowed.");
+
+
          return errors.Count == 0;
       }
 

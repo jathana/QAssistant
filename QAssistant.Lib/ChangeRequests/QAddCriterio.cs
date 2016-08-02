@@ -253,6 +253,7 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QPoolFieldsEnglishCaptionTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string Name
       {
          get
@@ -493,7 +494,13 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(WhereTable), "TableName is mandatory.");
          if (string.IsNullOrEmpty(whereField))
             errors.Add(nameof(WhereField), "FieldName is mandatory.");
+         if (Name.HasTrailingSpaces())
+            errors.Add(nameof(Name), "Trailing spaces are not allowed.");
 
+         if (WhereField.HasTrailingSpaces())
+            errors.Add(nameof(WhereField), "Trailing spaces are not allowed.");
+         if (WhereTable.HasTrailingSpaces())
+            errors.Add(nameof(WhereTable), "Trailing spaces are not allowed.");
 
          return errors.Count == 0;
       }

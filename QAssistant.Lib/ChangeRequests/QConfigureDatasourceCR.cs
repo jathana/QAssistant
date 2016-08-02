@@ -210,23 +210,23 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
 
-      public void ConfigureDatasourceFieldCR(QCRField field)
+      public void ConfigureDatasourceFieldCR(QPoolField field)
       {
             if (!Children.Any(F => F.GetType().Equals(typeof(QAddDatasourceFieldCR)) &&
                                    ((QAddDatasourceFieldCR)F).FieldName == field.FieldName &&
-                                   ((QAddDatasourceFieldCR)F).FieldCaption == field.FieldCaption &&
+                                   ((QAddDatasourceFieldCR)F).FieldCaption == field.EnglishCaption &&
                                    ((QAddDatasourceFieldCR)F).InstallationCode == InstallationCode)
                )
             {
                QAddDatasourceFieldCR cr = AddNewChild<QAddDatasourceFieldCR>();
                cr.FieldName = field.FieldName;
-               cr.FieldCaption = field.FieldCaption;
+               cr.FieldCaption = field.EnglishCaption;
             }
       }
 
-      public void ConfigureDatasourceFieldsCR(QCRFields fields)
+      public void ConfigureDatasourceFieldsCR(List<QPoolField> fields)
       {
-         foreach (QCRField fld in fields)
+         foreach (QPoolField fld in fields)
          {
             ConfigureDatasourceFieldCR(fld);
          }

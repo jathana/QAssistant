@@ -238,10 +238,8 @@ namespace QAssistant
             {
                e.Menu.Items.Add(new DevExpress.Utils.Menu.DXMenuItem(string.Format("Script Criterio"), trlCRTree_ScriptCriterio));
             }
-
          }
       }
-
 
       private void trlCRTree_ScriptCriterio(object sender, EventArgs e)
       {

@@ -202,7 +202,8 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(RelatedDBObject), "RelatedDBObject is mandatory.");
          if (databaseName.IsInvalid())
             errors.Add(nameof(DatabaseName), "Check DatabaseName.");
-
+         if (RelatedDBObject.HasTrailingSpaces())
+            errors.Add(nameof(RelatedDBObject), "Trailing spaces are not allowed.");
          return errors.Count == 0;
       }
 

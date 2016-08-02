@@ -125,6 +125,13 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(FieldName), "Field name is mandatory.");
          if (string.IsNullOrEmpty(fieldCaption))
             errors.Add(nameof(FieldCaption), "Field caption is mandatory.");
+
+         if (FieldName.HasTrailingSpaces())
+            errors.Add(nameof(FieldName), "Trailing spaces are not allowed.");
+         if (FieldCaption.HasTrailingSpaces())
+            errors.Add(nameof(FieldCaption), "Trailing spaces are not allowed.");
+
+
          return errors.Count == 0;
       }
 

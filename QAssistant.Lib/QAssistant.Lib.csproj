@@ -100,8 +100,6 @@
     <Compile Include="QDataComparer.cs" />
     <Compile Include="QDataDiff.cs" />
     <Compile Include="QDataDiffs.cs" />
-    <Compile Include="QCRField.cs" />
-    <Compile Include="QCRFields.cs" />
     <Compile Include="QDBObjectType.cs" />
     <Compile Include="QDynamicUI.cs" />
     <Compile Include="QEnvironmentType.cs" />
@@ -131,6 +129,7 @@
     </Compile>
     <Compile Include="TypeEditors\QCollectionTypeEditor.cs" />
     <Compile Include="TypeEditors\QPoolFieldsManyTypeEditor.cs" />
+    <Compile Include="TypeEditors\QPoolFieldsEnglishCaptionTypeEditor.cs" />
     <Compile Include="TypeEditors\QPoolTablesTypeEditor.cs" />
     <Compile Include="TypeEditors\QDBTablesViewsSPsTypeEditor.cs" />
     <Compile Include="TypeEditors\QPoolFieldsTypeEditor.cs" />
@@ -145,6 +144,7 @@
     <Compile Include="TypeEditors\ucMultiSelectionGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="XmlNodeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

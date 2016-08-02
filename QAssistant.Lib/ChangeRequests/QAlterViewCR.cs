@@ -93,6 +93,8 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(ViewName), "View name is mandatory.");
          if (databaseName.IsInvalid())
             errors.Add(nameof(DatabaseName), "Check database name.");
+         if (ViewName.HasTrailingSpaces())
+            errors.Add(nameof(ViewName), "Trailing spaces are not allowed.");
          return errors.Count == 0;
       }
 

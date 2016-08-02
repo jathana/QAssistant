@@ -81,6 +81,9 @@ namespace QAssistant.Lib.ChangeRequests
          errors = new Dictionary<string, string>();
          if (string.IsNullOrEmpty(ColumnName))
             errors.Add(nameof(ColumnName), "Column name is mandatory.");
+         if (ColumnName.HasTrailingSpaces())
+            errors.Add(nameof(ColumnName), "Trailing spaces are not allowed.");
+
          return errors.Count == 0;
       }
 
