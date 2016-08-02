@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QAssistant.Lib.TypeEditors;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ namespace QAssistant.Lib.ChangeRequests
    {
 
       #region fields
-      private QCRFields fields = new QCRFields();
+      private List<QPoolField> poolFields = new List<QPoolField>();
       private QDBObjectType dbObjectType = QDBObjectType.View;
 
 
@@ -21,11 +23,16 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       #region properties
-      public QCRFields Fields
+      [Editor(typeof(QPoolFieldsManyTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
+      public List<QPoolField> PoolFields
       {
          get
          {
-            return fields;
+            return poolFields;
+         }
+         set
+         {
+            poolFields = value;
          }
       }
 
@@ -110,40 +117,49 @@ namespace QAssistant.Lib.ChangeRequests
       #endregion
       #region methods
 
+      private void ModifyTables()
+      {
+         // foreach field
+         // 1. check if table exists. If not create change table. Add add column cr.
+         foreach (QPoolField poolField in poolFields)
+         {
+            // normally there is only one alter table cr, but check all.
+            List<QAlterTableCR> alterTablesCR = ChangeRequest.GetDescendants<QAlterTableCR>().Where(CR => CR.TableName == poolField.TableName && CR.DatabaseName == DatabaseName).ToList();
+            if (alterTablesCR != null && alterTablesCR.Count > 0)
+            {
+               // check if QAddColumnToTableCR item exists in alterTableCR.
+               foreach (QAlterTableCR alterTableCR in alterTablesCR)
+               {
+                  List<QAddColumnToTableCR> columns = alterTableCR.GetDescendants<QAddColumnToTableCR>().Where(CR => CR.ColumnName == poolField.FieldName).ToList();
+                  if (columns == null || columns.Count == 0)
+                  {
+                     // add field to table.
+                     alterTableCR.AddColumnToTableCR(poolField.FieldName);
+                  }
+               }
+            }
+            else
+            {
+               // create alter table cr, add field and add it to change request.
+               QAlterTableCR alterTableCR = ChangeRequest.AddNewChild<QAlterTableCR>();
+               alterTableCR.TableName = poolField.TableName;
+               alterTableCR.DatabaseName = DatabaseName;
+               alterTableCR.AddColumnToTableCR(poolField.FieldName);
+            }
+         }
+
+      }
+
       public override void Modify()
       {
          // Table
-         var tbChildren = ChangeRequest.Children.Where(c => c.GetType() == typeof(QAlterTableCR) && 
-                                                            ((QAlterTableCR)c).TableName == TableName &&
-                                                            ((QAlterTableCR)c).DatabaseName == DatabaseName).ToList();
-         
-         if (tbChildren != null && tbChildren.Count > 0)
-         {
-            foreach (QAlterTableCR alterTableCR in tbChildren)
-            {
-               QAlterTableCRModifier alterTableCRModifier = new QAlterTableCRModifier();
-               alterTableCRModifier.ChangeRequest = alterTableCR;
-               alterTableCRModifier.Fields = fields;
-               alterTableCRModifier.Modify();
-            }
-         }
-         else
-         {
-            QAlterTableCR alterTableCR = ChangeRequest.AddNewChild<QAlterTableCR>();
-            alterTableCR.TableName = TableName;
-            alterTableCR.DatabaseName = DatabaseName;
-            QAlterTableCRModifier alterTableCRModifier = new QAlterTableCRModifier();
-            alterTableCRModifier.ChangeRequest = alterTableCR;
-            alterTableCRModifier.Fields = fields;
-            alterTableCRModifier.Modify();
-
-         }
+         ModifyTables();
 
          // View / Stored procedure(todo)
          if (dbObjectType == QDBObjectType.View)
          {
             var viewChildren = ChangeRequest.Children.Where(c => c.GetType() == typeof(QAlterViewCR) &&
-                                                           ((QAlterViewCR)c).ViewName == TableName &&
+                                                           ((QAlterViewCR)c).ViewName == RelatedDBObject &&
                                                            ((QAlterViewCR)c).DatabaseName == DatabaseName).ToList();
             if (viewChildren != null && viewChildren.Count > 0)
             {
@@ -151,7 +167,7 @@ namespace QAssistant.Lib.ChangeRequests
                {
                   QAlterViewCRModifier alterViewCRModifier = new QAlterViewCRModifier();
                   alterViewCRModifier.ChangeRequest = alterViewCR;
-                  alterViewCRModifier.Fields = fields;
+                  alterViewCRModifier.PoolFields = poolFields;
                   alterViewCRModifier.Modify();
                }
             }
@@ -163,7 +179,7 @@ namespace QAssistant.Lib.ChangeRequests
 
                QAlterViewCRModifier alterViewCRModifier = new QAlterViewCRModifier();
                alterViewCRModifier.ChangeRequest = alterViewCR;
-               alterViewCRModifier.Fields = fields;
+               alterViewCRModifier.PoolFields = poolFields;
                alterViewCRModifier.Modify();
             }
          }
@@ -179,7 +195,7 @@ namespace QAssistant.Lib.ChangeRequests
             {
                QConfigureDatasourceCRModifier configureDatasourceCRModifier = new QConfigureDatasourceCRModifier();
                configureDatasourceCRModifier.ChangeRequest = configureDatasourceCR;
-               configureDatasourceCRModifier.Fields = fields;
+               configureDatasourceCRModifier.PoolFields = poolFields;
                configureDatasourceCRModifier.Modify();
             }
          }
@@ -192,7 +208,7 @@ namespace QAssistant.Lib.ChangeRequests
             configureDatasourceCR.RelatedDBObject = RelatedDBObject;
             QConfigureDatasourceCRModifier configureDatasourceCRModifier = new QConfigureDatasourceCRModifier();
             configureDatasourceCRModifier.ChangeRequest = configureDatasourceCR;
-            configureDatasourceCRModifier.Fields = fields;
+            configureDatasourceCRModifier.PoolFields = poolFields;
             configureDatasourceCRModifier.Modify();
          }
 
@@ -207,7 +223,7 @@ namespace QAssistant.Lib.ChangeRequests
             {
                QConfigureDUICRModifier configureDatasourceCRModifier = new QConfigureDUICRModifier();
                configureDatasourceCRModifier.ChangeRequest = configureDatasourceCR;
-               configureDatasourceCRModifier.Fields = fields;
+               configureDatasourceCRModifier.PoolFields = poolFields;
                configureDatasourceCRModifier.Modify();
             }
          }
@@ -220,7 +236,7 @@ namespace QAssistant.Lib.ChangeRequests
             configureDUICR.RelatedDBObject = RelatedDBObject;
             QConfigureDUICRModifier configureDUICRModifier = new QConfigureDUICRModifier();
             configureDUICRModifier.ChangeRequest = configureDUICR;
-            configureDUICRModifier.Fields = fields;
+            configureDUICRModifier.PoolFields = poolFields;
             configureDUICRModifier.Modify();
          }
 

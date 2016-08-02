@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QAssistant.Lib.TypeEditors;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ namespace QAssistant.Lib.ChangeRequests
    {
 
       #region fields
-      private QCRFields fields = new QCRFields();
+      private List<QPoolField> poolFields = new List<QPoolField>();
       
 
       #endregion
@@ -21,15 +23,16 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       #region properties
-      public QCRFields Fields
+      [Editor(typeof(QPoolFieldsManyTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
+      public List<QPoolField> PoolFields
       {
          get
          {
-            return fields;
+            return poolFields;
          }
          set
          {
-            fields = value;
+            poolFields = value;
          }
       }
       #endregion
@@ -38,14 +41,14 @@ namespace QAssistant.Lib.ChangeRequests
 
       public override void Modify()
       {
-         foreach(QCRField field in fields)
+         foreach(QPoolField poolField in poolFields)
          {
-            var children = ChangeRequest.Children.Where(C => C.GetType() == typeof(QAddColumnToTableCR) && ((QAddColumnToTableCR)C).ColumnName == field.FieldName).ToList();
+            var children = ChangeRequest.GetDescendants<QAddColumnToTableCR>().Where(C => C.ColumnName == poolField.FieldName).ToList();
             if (children == null || children.Count == 0)
             {
                // add child
                QAddColumnToTableCR newchild= ChangeRequest.AddNewChild<QAddColumnToTableCR>();
-               newchild.ColumnName = field.FieldName;
+               newchild.ColumnName = poolField.FieldName;
             }
          }
       }

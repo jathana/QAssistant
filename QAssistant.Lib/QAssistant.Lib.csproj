@@ -84,7 +84,6 @@
     <Compile Include="ChangeRequests\QConfigureDUIStackCR.cs" />
     <Compile Include="ChangeRequests\QAlterTableCRModifier.cs" />
     <Compile Include="ChangeRequests\QCRModifier.cs" />
-    <Compile Include="ChangeRequests\QDUIStackCRModifier.cs" />
     <Compile Include="ChangeRequests\QGroupCR.cs" />
     <Compile Include="ChangeRequests\QAlterViewCR.cs" />
     <Compile Include="ChangeRequests\QCRAction.cs" />
@@ -131,6 +130,7 @@
       <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="TypeEditors\QCollectionTypeEditor.cs" />
+    <Compile Include="TypeEditors\QPoolFieldsManyTypeEditor.cs" />
     <Compile Include="TypeEditors\QPoolTablesTypeEditor.cs" />
     <Compile Include="TypeEditors\QDBTablesViewsSPsTypeEditor.cs" />
     <Compile Include="TypeEditors\QPoolFieldsTypeEditor.cs" />
@@ -142,12 +142,18 @@
     <Compile Include="TypeEditors\QCriterioCategoryTypeEditor.cs" />
     <Compile Include="TypeEditors\QDatabaseNamesTypeEditor.cs" />
     <Compile Include="TypeEditors\QDatabaseNameTypeEditor.cs" />
+    <Compile Include="TypeEditors\ucMultiSelectionGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="XmlNodeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="TypeEditors\frmAvailableSelectedCollectionEditor.resx">
       <DependentUpon>frmAvailableSelectedCollectionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TypeEditors\ucMultiSelectionGrid.resx">
+      <DependentUpon>ucMultiSelectionGrid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

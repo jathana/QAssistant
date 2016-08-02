@@ -13,7 +13,7 @@ namespace QAssistant.Lib.ChangeRequests
 
       #region fields
       private int installationCode = 0;
-      private QCRFields fields = new QCRFields();
+      private List<QPoolField> poolFields = new List<QPoolField>();
 
       #endregion
 
@@ -22,15 +22,16 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       #region properties
-      public QCRFields Fields
+      [Editor(typeof(QPoolFieldsManyTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
+      public List<QPoolField> PoolFields
       {
          get
          {
-            return fields;
+            return poolFields;
          }
          set
          {
-            fields = value;
+            poolFields = value;
          }
       }
       [Editor(typeof(QInstallationCodeTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
@@ -51,18 +52,18 @@ namespace QAssistant.Lib.ChangeRequests
 
       public override void Modify()
       {
-         foreach(QCRField field in fields)
+         foreach(QPoolField field in poolFields)
          {
             var children = ChangeRequest.Children.Where(C => C.GetType() == typeof(QAddDatasourceFieldCR) && 
                                                             ((QAddDatasourceFieldCR)C).FieldName == field.FieldName &&
-                                                            ((QAddDatasourceFieldCR)C).FieldCaption == field.FieldCaption &&
+                                                            ((QAddDatasourceFieldCR)C).FieldCaption == field.EnglishCaption &&
                                                             ((QAddDatasourceFieldCR)C).InstallationCode == installationCode).ToList();
             if (children == null || children.Count == 0)
             {
                // add child
                QAddDatasourceFieldCR newchild = ChangeRequest.AddNewChild<QAddDatasourceFieldCR>();
                newchild.FieldName = field.FieldName;
-               newchild.FieldCaption = field.FieldCaption;
+               newchild.FieldCaption = field.EnglishCaption;
             }
          }
       }
