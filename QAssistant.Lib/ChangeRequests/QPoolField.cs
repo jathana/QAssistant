@@ -17,6 +17,7 @@ namespace QAssistant.Lib.ChangeRequests
       #region fields
       private string fieldName = "";
       private string tableName = "";
+      private string dbType = "";
       private string englishCaption = "";
       private string greekCaption = "";
 
@@ -51,6 +52,22 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.tableName)
             {
                this.tableName = value;
+               NotifyPropertyChanged();
+            }
+         }
+      }
+      [Category(QConsts.CategoryRequired)]
+      public string DBType
+      {
+         get
+         {
+            return dbType;
+         }
+         set
+         {
+            if (value != this.dbType)
+            {
+               this.dbType = value;
                NotifyPropertyChanged();
             }
          }
@@ -105,6 +122,7 @@ namespace QAssistant.Lib.ChangeRequests
          englishCaption = "";
          greekCaption = "";
          needsChildren = false;
+         dbType = "";
       }
 
       #region methods
@@ -115,6 +133,8 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(FieldName), "Field name is mandatory.");
          if (string.IsNullOrEmpty(tableName))
             errors.Add(nameof(TableName), "Table name is mandatory.");
+         if (string.IsNullOrEmpty(dbType))
+            errors.Add(nameof(DBType), "DBType name is mandatory.");
          if (string.IsNullOrEmpty(englishCaption))
             errors.Add(nameof(EnglishCaption), "English caption is mandatory.");
          if (TableName.HasTrailingSpaces())
@@ -147,6 +167,7 @@ namespace QAssistant.Lib.ChangeRequests
          {
             FieldName = this.fieldName,
             TableName = this.tableName,
+            dbType = this.dbType,
             EnglishCaption= this.englishCaption,
             GreekCaption = this.greekCaption,
             Parent = this.Parent
@@ -183,6 +204,7 @@ namespace QAssistant.Lib.ChangeRequests
             base.Serialize(w);
             w.WriteAttributeString("fieldname", FieldName);
             w.WriteAttributeString("tablename", TableName);
+            w.WriteAttributeString("dbtype", DBType);
             w.WriteAttributeString("englishcaption", EnglishCaption);
             w.WriteAttributeString("greekcaption", GreekCaption);
 
@@ -198,6 +220,7 @@ namespace QAssistant.Lib.ChangeRequests
          base.Deserialize(Node);
          FieldName = Node.ReadString("fieldname", "");
          TableName = Node.ReadString("tablename", "");
+         DBType = Node.ReadString("dbtype", "");
          EnglishCaption = Node.ReadString("englishcaption", "");
          GreekCaption = Node.ReadString("greekcaption", "");
 

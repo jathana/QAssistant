@@ -43,8 +43,6 @@ namespace QAssistant.Lib.ChangeRequests
       private string criWhere = "";
       private string crjCode = "";
       private string crjJoin = "";
-      private string criWhereTable = "";
-      private string criWhereField = "";
       private string criWhereShow = "";
       private string criWhereFieldSqlType = "";
       #endregion
@@ -321,6 +319,7 @@ namespace QAssistant.Lib.ChangeRequests
             if (value != this.whereField)
             {
                this.whereField = value;
+
                NotifyPropertyChanged();
             }
          }
@@ -343,6 +342,14 @@ namespace QAssistant.Lib.ChangeRequests
          {
             return criTable;
          }
+         set
+         {
+            if (value != this.criTable)
+            {
+               this.criTable = value;
+               NotifyPropertyChanged();
+            }
+         }
       }
       [Category(QConsts.CategoryInherited)]
       public string CriFields
@@ -350,6 +357,14 @@ namespace QAssistant.Lib.ChangeRequests
          get
          {
             return criFields;
+         }
+         set
+         {
+            if (value != this.criFields)
+            {
+               this.criFields = value;
+               NotifyPropertyChanged();
+            }
          }
       }
       [Category(QConsts.CategoryInherited)]
@@ -359,45 +374,63 @@ namespace QAssistant.Lib.ChangeRequests
          {
             return criWhere;
          }
+         set
+         {
+            if (value != this.criWhere)
+            {
+               this.criWhere = value;
+               NotifyPropertyChanged();
+            }
+         }
       }
-      [Category(QConsts.CategoryInherited)]
+      [Category(QConsts.CategoryRequired)]
+      [Editor(typeof(QCrjCodeTypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
       public string CrjCode
       {
          get
          {
             return crjCode;
          }
+         set
+         {
+            if (value != this.crjCode)
+            {
+               this.crjCode = value;
+               NotifyPropertyChanged();
+            }
+         }
       }
-      [Category(QConsts.CategoryInherited)]
+      [Category(QConsts.CategoryRequired)]
       public string CrjJoin
       {
          get
          {
             return crjJoin;
          }
-      }
-      [Category(QConsts.CategoryInherited)]
-      public string CriWhereTable
-      {
-         get
+         set
          {
-            return criWhereTable;
+            if (value != this.crjJoin)
+            {
+               this.crjJoin = value;
+               NotifyPropertyChanged();
+            }
          }
       }
-      [Category(QConsts.CategoryInherited)]
-      public string CriWhereField
-      {
-         get
-         {
-            return criWhereField;
-         }
-      }
+      
       [Category(QConsts.CategoryInherited)]
       public string CriWhereShow
       {
          get
          {
             return criWhereShow;
+         }
+         set
+         {
+            if (value != this.criWhereShow)
+            {
+               this.criWhereShow = value;
+               NotifyPropertyChanged();
+            }
          }
       }
       [Category(QConsts.CategoryInherited)]
@@ -406,6 +439,14 @@ namespace QAssistant.Lib.ChangeRequests
          get
          {
             return criWhereFieldSqlType;
+         }
+         set
+         {
+            if (value != this.criWhereFieldSqlType)
+            {
+               this.criWhereFieldSqlType = value;
+               NotifyPropertyChanged();
+            }
          }
       }
 
@@ -423,6 +464,23 @@ namespace QAssistant.Lib.ChangeRequests
       }
 
       #region methods
+
+      private void OnWhereFieldUpdate()
+      {
+         // set Criterio Type
+
+         // set CriWhereSqlType
+      }
+
+      private QCriterioType DBTypeToCriterioType(string dbTypeParam)
+      {
+         QCriterioType retval = QCriterioType.Unspecified;
+
+         if (dbTypeParam.Equals("datetime")) retval = QCriterioType.Date;
+
+         return retval;
+      }
+
       public bool CanBeScripted()
       {
          return CheckResultType == QCRCheckResultType.WellImplemented;
@@ -495,6 +553,7 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(WhereTable), "TableName is mandatory.");
          if (string.IsNullOrEmpty(whereField))
             errors.Add(nameof(WhereField), "FieldName is mandatory.");
+
          if (Name.HasTrailingSpaces())
             errors.Add(nameof(Name), "Trailing spaces are not allowed.");
 
@@ -502,6 +561,10 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(WhereField), "Trailing spaces are not allowed.");
          if (WhereTable.HasTrailingSpaces())
             errors.Add(nameof(WhereTable), "Trailing spaces are not allowed.");
+
+         if (string.IsNullOrEmpty(crjCode))
+            errors.Add(nameof(CrjCode), "CrjCode is mandatory.");
+
 
          return errors.Count == 0;
       }
@@ -546,8 +609,6 @@ namespace QAssistant.Lib.ChangeRequests
             criWhere = this.criWhere,
             crjCode = this.crjCode,
             crjJoin = this.crjJoin,
-            criWhereTable = this.criWhereTable,
-            criWhereField = this.criWhereField,
             criWhereShow = this.criWhereShow,
             criWhereFieldSqlType = this.criWhereFieldSqlType
          };
@@ -607,6 +668,7 @@ namespace QAssistant.Lib.ChangeRequests
             w.WriteAttributeString("closedcases", closedCases.ToString());
             w.WriteAttributeString("tablename", whereTable);
             w.WriteAttributeString("fieldname", whereField);
+            w.WriteAttributeString("crjcode", crjCode);
 
             w.WriteEndElement();
             w.Flush();
@@ -633,6 +695,7 @@ namespace QAssistant.Lib.ChangeRequests
          ClosedCases = Node.ReadBool("closedcases");
          WhereTable = Node.ReadString("tablename");
          WhereField = Node.ReadString("fieldname");
+         CrjCode = Node.ReadString("crjcode");
 
       }
 
@@ -720,6 +783,7 @@ namespace QAssistant.Lib.ChangeRequests
                bool tmpClosedCases = (bool)tbRec.Rows[0]["CRI_CLOSED_CASES"];
                string tmpCriWhereTable = (string)tbRec.Rows[0]["CRI_WHERE_TABLE"];
                string tmpCriWhereField = (string)tbRec.Rows[0]["CRI_WHERE_FIELD"];
+               string tmpCrjCode = (string)tbRec.Rows[0]["CRJ_CODE"];
                retval = CheckSpecValue(CriterioType, tmpCriterioType, "Criterio Type") && retval;
                retval = CheckSpecValue(Queues, tmpQueues, "Queues") && retval;
                retval = CheckSpecValue(DynamicQueues, tmpDynamicQueues, "DynamicQueues") && retval;
@@ -730,16 +794,15 @@ namespace QAssistant.Lib.ChangeRequests
                retval = CheckSpecValue(IsCustomerLevel, tmpIsCustomerLevel, "IsCustomerLevel") && retval;
                retval = CheckSpecValue(WhereField, tmpCriWhereField, "FieldName",true) && retval;
                retval = CheckSpecValue(WhereTable, tmpCriWhereTable, "TableName") && retval;
+               retval = CheckSpecValue(CrjCode, tmpCrjCode, "CrjCode") && retval;
+
 
                // set output fields
                criUniqueId = (string)tbRec.Rows[0]["CRI_UNIQUE_ID"];
                criTable = (string)tbRec.Rows[0]["CRI_TABLE"];
                criFields = (string)tbRec.Rows[0]["CRI_FIELDS"];
                criWhere = (string)tbRec.Rows[0]["CRI_WHERE"];
-               crjCode = Convert.ToString(tbRec.Rows[0]["CRJ_CODE"]);
-               crjJoin = (string)tbRec.Rows[0]["CRJ_JOIN"];
-               criWhereTable = (string)tbRec.Rows[0]["CRI_WHERE_TABLE"];
-               criWhereField = (string)tbRec.Rows[0]["CRI_WHERE_FIELD"];
+               crjCode = Convert.ToString(tbRec.Rows[0]["CRJ_CODE"]);               
                criWhereShow = (string)tbRec.Rows[0]["CRI_WHERE_SHOW"];
                criWhereFieldSqlType = (string)tbRec.Rows[0]["CRI_WHERE_FIELD_SQL_TYPE"];
             }
