@@ -11,6 +11,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Pool Fields")]
    public class QPoolFields : QGroupCR
    {
       #region fields

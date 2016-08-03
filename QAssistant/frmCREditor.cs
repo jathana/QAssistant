@@ -227,7 +227,7 @@ namespace QAssistant
 
             foreach(Type crType in objCR.CompatibleChildren)
             {
-               e.Menu.Items.Add(new DevExpress.Utils.Menu.DXMenuItem("Add " + crType.Name, addHandlers[crType]));
+               e.Menu.Items.Add(new DevExpress.Utils.Menu.DXMenuItem("Add " + crType.GetDescription(), addHandlers[crType]));
             }
             if (modifiers.ContainsKey(objCR.GetType()))
             {

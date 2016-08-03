@@ -85,6 +85,12 @@
     <Compile Include="frmAddFields.Designer.cs">
       <DependentUpon>frmAddFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCriterioHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCriterioHelper.Designer.cs">
+      <DependentUpon>frmCriterioHelper.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmModifier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,8 +144,17 @@
     <Compile Include="frmNewFields.Designer.cs">
       <DependentUpon>frmNewFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucCriterioHelper.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucCriterioHelper.Designer.cs">
+      <DependentUpon>ucCriterioHelper.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmAddFields.resx">
       <DependentUpon>frmAddFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCriterioHelper.resx">
+      <DependentUpon>frmCriterioHelper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifier.resx">
       <DependentUpon>frmModifier.cs</DependentUpon>
@@ -174,6 +189,9 @@
     </Compile>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucCriterioHelper.resx">
+      <DependentUpon>ucCriterioHelper.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />

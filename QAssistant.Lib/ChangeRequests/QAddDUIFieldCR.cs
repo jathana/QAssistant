@@ -11,6 +11,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("DUI Field CR")]
    public class QAddDUIFieldCR : QChangeRequest
    {
 

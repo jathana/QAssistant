@@ -10,6 +10,7 @@ using System.Xml;
 using QAssistant.Lib;
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Table Column CR")]
    public class QAddColumnToTableCR : QChangeRequest
    {
       

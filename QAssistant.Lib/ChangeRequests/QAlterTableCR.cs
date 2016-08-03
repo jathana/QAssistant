@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Alter Table CR")]
    public class QAlterTableCR:QChangeRequest
    {
       #region fields

@@ -98,7 +98,7 @@
          // 
          // document1
          // 
-         this.document1.Caption = "dockPanel1";
+         this.document1.Caption = "Properties";
          this.document1.ControlName = "dockPanel1";
          this.document1.FloatLocation = new System.Drawing.Point(0, 0);
          this.document1.FloatSize = new System.Drawing.Size(200, 200);

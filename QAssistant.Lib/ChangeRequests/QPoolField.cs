@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
+
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Pool Field")]
    public class QPoolField: QChangeRequest
    {
 
@@ -121,6 +123,9 @@ namespace QAssistant.Lib.ChangeRequests
             errors.Add(nameof(EnglishCaption), "Trailing spaces are not allowed.");
          if (GreekCaption.HasTrailingSpaces())
             errors.Add(nameof(GreekCaption), "Trailing spaces are not allowed.");
+         if (FieldName.HasTrailingSpaces())
+            errors.Add(nameof(FieldName), "Trailing spaces are not allowed.");
+
 
          return errors.Count == 0;
       }

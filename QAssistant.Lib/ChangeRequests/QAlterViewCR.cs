@@ -10,6 +10,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Alter view CR")]
    public class QAlterViewCR:QChangeRequest
    {
       #region fields

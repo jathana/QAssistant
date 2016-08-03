@@ -12,6 +12,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Configure Datasource CR")]
    public class QConfigureDatasourceCR : QChangeRequest
    {
       #region fields

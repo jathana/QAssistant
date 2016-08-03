@@ -11,6 +11,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Datasource Field CR")]
    public class QAddDatasourceFieldCR : QChangeRequest
    {
 

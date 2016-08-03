@@ -19,6 +19,7 @@ namespace QAssistant.Lib.ChangeRequests
       #region fields
       protected List<Type> compatibleChildren = new List<Type>();
       protected bool needsChildren = false;
+      protected string comments = "";
       #endregion
 
       #region properties
@@ -59,6 +60,22 @@ namespace QAssistant.Lib.ChangeRequests
          }
       }
 
+      public string Comments
+      {
+         get
+         {
+            return comments;
+         }
+         set
+         {
+            if (value != this.comments)
+            {
+               this.comments = value;
+               NotifyPropertyChanged();
+            }
+         }
+      }
+
       [Browsable(false)]
       protected bool NeedsChildren
       {
@@ -67,6 +84,8 @@ namespace QAssistant.Lib.ChangeRequests
             return needsChildren;
          }
       }
+
+
       #endregion
 
       #region INotifyPropertyChanged
@@ -148,6 +167,8 @@ namespace QAssistant.Lib.ChangeRequests
       public virtual void Deserialize(XmlNode Node)
       {
          Id = Node.ReadString("id");
+         Comments = Node.ReadString("comments");
+
       }
       public virtual T AddNewChild<T>() where T : QChangeRequest,new()
       {
@@ -183,6 +204,9 @@ namespace QAssistant.Lib.ChangeRequests
                         .ToList<T>();
          return nodes;
       }
+
+
+      
 
       #endregion
 
@@ -228,6 +252,7 @@ namespace QAssistant.Lib.ChangeRequests
          if (w != null)
          {
             w.WriteAttributeString("id", Id);
+            w.WriteAttributeString("comments", comments);
             //w.WriteAttributeString("changerequesttype", ChangeRequestType.ToString());
          }
       }

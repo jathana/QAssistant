@@ -8,6 +8,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Document CR")]
    public class QDocumentCR : QChangeRequest
    {
       #region fields

@@ -10,6 +10,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Configure DUI Stack Many")]
    public class QConfigureDUIStackManyCR : QGroupCR
    {
       #region fields

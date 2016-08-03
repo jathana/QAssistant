@@ -10,6 +10,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("View Column CR")]
    public class QAddColumnToViewCR : QChangeRequest
    {
       #region fields

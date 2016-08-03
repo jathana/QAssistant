@@ -12,6 +12,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Criterio CR")]
    public class QAddCriterioCR : QChangeRequest
    {
       #region internal fields

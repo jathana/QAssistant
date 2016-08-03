@@ -8,6 +8,7 @@ using System.Xml;
 
 namespace QAssistant.Lib.ChangeRequests
 {
+   [Description("Group CR")]
    public class QGroupCR:QChangeRequest
    {
       #region fields
