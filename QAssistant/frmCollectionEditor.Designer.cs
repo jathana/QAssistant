@@ -191,14 +191,14 @@
          this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
          this.layoutControlItem4.TextVisible = false;
          // 
-         // frmObjectEditor
+         // frmCollectionEditor
          // 
          this.AcceptButton = this.btnOK;
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(531, 504);
          this.Controls.Add(this.layoutControl1);
-         this.Name = "frmObjectEditor";
+         this.Name = "frmCollectionEditor";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
          this.Text = "Object Editor";
          this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmObjectEditor_FormClosing);

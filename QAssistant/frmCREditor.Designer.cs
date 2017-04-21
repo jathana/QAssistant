@@ -28,13 +28,14 @@
       /// </summary>
       private void InitializeComponent()
       {
+         this.components = new System.ComponentModel.Container();
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCREditor));
          DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
          DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
          DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-         this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup();
-         this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document();
-         this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
+         this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
+         this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+         this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
          this.pnlCRTree = new DevExpress.XtraBars.Docking.DockPanel();
          this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
          this.trlCRTree = new DevExpress.XtraTreeList.TreeList();
@@ -42,7 +43,7 @@
          this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          this.repositoryItemImageEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageEdit();
-         this.imageCollection1 = new DevExpress.Utils.ImageCollection();
+         this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
          this.pnlActions = new DevExpress.XtraBars.Docking.DockPanel();
          this.dockPanel3_Container = new DevExpress.XtraBars.Docking.ControlContainer();
          this.grdCRActions = new DevExpress.XtraGrid.GridControl();
@@ -52,7 +53,7 @@
          this.btnCheckCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnCloseCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnAddChildCR = new DevExpress.XtraBars.BarButtonItem();
-         this.mnuAddChildCR = new DevExpress.XtraBars.PopupMenu();
+         this.mnuAddChildCR = new DevExpress.XtraBars.PopupMenu(this.components);
          this.btnAddGroupCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnAddViewCR = new DevExpress.XtraBars.BarButtonItem();
          this.btnAlterTableCR = new DevExpress.XtraBars.BarButtonItem();
@@ -66,8 +67,8 @@
          this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
          this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
          this.propertyGridControl1 = new DevExpress.XtraVerticalGrid.PropertyGridControl();
-         this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
-         this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
+         this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
+         this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
          this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
          ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
@@ -140,7 +141,7 @@
          this.dockPanel1_Container.Controls.Add(this.trlCRTree);
          this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
          this.dockPanel1_Container.Name = "dockPanel1_Container";
-         this.dockPanel1_Container.Size = new System.Drawing.Size(449, 381);
+         this.dockPanel1_Container.Size = new System.Drawing.Size(448, 381);
          this.dockPanel1_Container.TabIndex = 0;
          // 
          // trlCRTree
@@ -160,7 +161,7 @@
          this.trlCRTree.OptionsView.ShowColumns = false;
          this.trlCRTree.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemImageEdit1});
-         this.trlCRTree.Size = new System.Drawing.Size(449, 381);
+         this.trlCRTree.Size = new System.Drawing.Size(448, 381);
          this.trlCRTree.TabIndex = 0;
          this.trlCRTree.GetStateImage += new DevExpress.XtraTreeList.GetStateImageEventHandler(this.trlCRTree_GetStateImage);
          this.trlCRTree.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.trlCRTree_FocusedNodeChanged);
@@ -232,9 +233,9 @@
          // dockPanel3_Container
          // 
          this.dockPanel3_Container.Controls.Add(this.grdCRActions);
-         this.dockPanel3_Container.Location = new System.Drawing.Point(4, 23);
+         this.dockPanel3_Container.Location = new System.Drawing.Point(4, 24);
          this.dockPanel3_Container.Name = "dockPanel3_Container";
-         this.dockPanel3_Container.Size = new System.Drawing.Size(413, 136);
+         this.dockPanel3_Container.Size = new System.Drawing.Size(413, 135);
          this.dockPanel3_Container.TabIndex = 0;
          // 
          // grdCRActions
@@ -244,7 +245,7 @@
          this.grdCRActions.MainView = this.gridView2;
          this.grdCRActions.MenuManager = this.ribbonControl1;
          this.grdCRActions.Name = "grdCRActions";
-         this.grdCRActions.Size = new System.Drawing.Size(413, 136);
+         this.grdCRActions.Size = new System.Drawing.Size(413, 135);
          this.grdCRActions.TabIndex = 0;
          this.grdCRActions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -451,6 +452,7 @@
             this.documentGroup1});
          this.tabbedView1.Documents.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseDocument[] {
             this.document1});
+         this.tabbedView1.RootContainer.Element = null;
          dockingContainer1.Element = this.documentGroup1;
          this.tabbedView1.RootContainer.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
             dockingContainer1});

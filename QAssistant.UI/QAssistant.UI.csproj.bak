@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{91FB3531-699D-4CB6-9AC0-206B86738F66}</ProjectGuid>
+    <ProjectGuid>{72969098-00D8-4019-8C11-5C8C66FC574C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QAssistant.Lib.UI</RootNamespace>
-    <AssemblyName>QAssistant.Lib.UI</AssemblyName>
+    <RootNamespace>QAssistant.UI</RootNamespace>
+    <AssemblyName>QAssistant.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,13 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v15.2.Core, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -48,27 +48,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="uc_AddColumnToTableCR.cs">
+    <Compile Include="Criteria\ucNewCriterion.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="uc_AddColumnToTableCR.Designer.cs">
-      <DependentUpon>uc_AddColumnToTableCR.cs</DependentUpon>
+    <Compile Include="Criteria\ucNewCriterion.Designer.cs">
+      <DependentUpon>ucNewCriterion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLServerConnection\SqlServerConnectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQLServerConnection\SqlServerConnectionDialog.Designer.cs">
+      <DependentUpon>SqlServerConnectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQLServerConnection\ucConnectionString.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SQLServerConnection\ucConnectionString.designer.cs">
+      <DependentUpon>ucConnectionString.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="Criteria\ucNewCriterion.resx">
+      <DependentUpon>ucNewCriterion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="uc_AddColumnToTableCR.resx">
-      <DependentUpon>uc_AddColumnToTableCR.cs</DependentUpon>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="SQLServerConnection\SqlServerConnectionDialog.resx">
+      <DependentUpon>SqlServerConnectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLServerConnection\ucConnectionString.resx">
+      <DependentUpon>ucConnectionString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -76,9 +85,6 @@
       <Project>{0e50d05d-2bc6-4681-b523-6d0523c1928a}</Project>
       <Name>QAssistant.Lib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TypeEditors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

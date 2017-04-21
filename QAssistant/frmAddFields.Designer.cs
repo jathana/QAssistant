@@ -29,6 +29,7 @@
       private void InitializeComponent()
       {
          this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+         this.btnUICR = new DevExpress.XtraEditors.SimpleButton();
          this.gridControl1 = new DevExpress.XtraGrid.GridControl();
          this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
          this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -38,7 +39,6 @@
          this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
          this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
          this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-         this.btnUICR = new DevExpress.XtraEditors.SimpleButton();
          this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
          ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
          this.layoutControl1.SuspendLayout();
@@ -67,6 +67,16 @@
          this.layoutControl1.Size = new System.Drawing.Size(550, 458);
          this.layoutControl1.TabIndex = 0;
          this.layoutControl1.Text = "layoutControl1";
+         // 
+         // btnUICR
+         // 
+         this.btnUICR.Location = new System.Drawing.Point(12, 137);
+         this.btnUICR.Name = "btnUICR";
+         this.btnUICR.Size = new System.Drawing.Size(526, 22);
+         this.btnUICR.StyleController = this.layoutControl1;
+         this.btnUICR.TabIndex = 7;
+         this.btnUICR.Text = "Test UI CR";
+         this.btnUICR.Click += new System.EventHandler(this.btnUICR_Click);
          // 
          // gridControl1
          // 
@@ -149,16 +159,6 @@
          this.emptySpaceItem1.Name = "emptySpaceItem1";
          this.emptySpaceItem1.Size = new System.Drawing.Size(530, 10);
          this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-         // 
-         // btnUICR
-         // 
-         this.btnUICR.Location = new System.Drawing.Point(12, 137);
-         this.btnUICR.Name = "btnUICR";
-         this.btnUICR.Size = new System.Drawing.Size(526, 22);
-         this.btnUICR.StyleController = this.layoutControl1;
-         this.btnUICR.TabIndex = 7;
-         this.btnUICR.Text = "Test UI CR";
-         this.btnUICR.Click += new System.EventHandler(this.btnUICR_Click);
          // 
          // layoutControlItem4
          // 
