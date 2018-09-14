@@ -7,9 +7,15 @@
          <sqlserver name="q-srv-devel12">
             <databases>
                <database name="QBCollection_Plus_CURRENT" integratedsecurity="true"/>
-               <database name="QBCollection_Plus_6_10" integratedsecurity="true"/>
-               <database name="QBCollection_Plus_6_9" integratedsecurity="true"/>
-               <database name="QBCollection_Plus_6_8" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_7_8_300" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_8_3" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_8_2" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_7_8" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_7_5" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_7_4" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_7_3" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_7_2" integratedsecurity="true"/>
+               <database name="QBCollection_Plus_7_0" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_7" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_5" integratedsecurity="true"/>
                <database name="QBCollection_Plus_6_4_121" integratedsecurity="true"/>
@@ -58,6 +64,16 @@
                <database name="QBCollection_Plus_FUIB_UA_5_5" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
             </databases>
          </sqlserver>
+
+      <sqlserver name="Q-SRV-DEVFPS2\MSSQL2K14">
+            <databases>
+               <database name="QBCollection_Plus_SBANK_REGRESSION" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
+               <database name="QBCollection_Plus_SBANK_REGRESSION_7_8_300" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
+               <database name="QBCollection_Plus_SBANK_REGRESSION_7_8" integratedsecurity="false" userid="qbc_user" password="qbc_user"/>
+            </databases>
+         </sqlserver>
+
+
       </environment>
          <environment type="Live">
          <sqlserver name="Q-SRV-QCSPILOTS">
